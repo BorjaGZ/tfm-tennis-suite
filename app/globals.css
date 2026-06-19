@@ -1,26 +1,341 @@
-@import "tailwindcss";
+/* ============================================
+   TENNIS SUITE — Design System
+   ============================================ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ts-bg-primary:    #0f1419;
+  --ts-bg-secondary:  #1a1f2e;
+  --ts-bg-nav:        #0a0e1a;
+
+  --ts-accent-lime:   #dfff4f;
+  --ts-accent-green:  #4CAF50;
+  --ts-accent-red:    #ff4444;
+
+  --ts-text-primary:  #ffffff;
+  --ts-text-muted:    rgba(255,255,255,0.35);
+  --ts-text-faint:    rgba(255,255,255,0.15);
+
+  --ts-border-default: rgba(255,255,255,0.08);
+  --ts-border-lime:    rgba(223,255,79,0.2);
+  --ts-border-green:   rgba(76,175,80,0.2);
+
+  --ts-radius:        10px;
+  --ts-radius-lg:     14px;
+
+  --font-mono: 'Space Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--ts-bg-primary);
+  color: var(--ts-text-primary);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+/* ============================================
+   NAV
+   ============================================ */
+.ts-nav {
+  background: var(--ts-bg-nav);
+  border-bottom: 1px solid var(--ts-border-lime);
+  padding: 16px 0;
+}
+
+.ts-nav-brand {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ts-accent-lime);
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.ts-nav-brand:hover {
+  color: var(--ts-accent-lime);
+}
+
+.ts-nav-section {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ts-text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.ts-card {
+  background: var(--ts-bg-secondary);
+  border: 1px solid var(--ts-border-default);
+  border-radius: var(--ts-radius-lg);
+  padding: 32px;
+}
+
+.ts-card-accent-lime {
+  border-top: 2px solid var(--ts-accent-lime);
+}
+
+.ts-card-accent-green {
+  border-top: 2px solid var(--ts-accent-green);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.ts-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ts-accent-lime);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.ts-label-green {
+  color: var(--ts-accent-green);
+}
+
+.ts-label-muted {
+  color: var(--ts-text-muted);
+  letter-spacing: 2px;
+}
+
+.ts-page-title {
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0 0 8px 0;
+}
+
+.ts-highlight-lime  { color: var(--ts-accent-lime); }
+.ts-highlight-green { color: var(--ts-accent-green); }
+.ts-text-muted-custom { color: var(--ts-text-muted); font-size: 14px; }
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+.ts-input {
+  background: var(--ts-bg-primary);
+  border: 1px solid var(--ts-border-default);
+  border-radius: var(--ts-radius);
+  color: var(--ts-text-primary);
+  font-size: 16px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ts-input:focus {
+  border-color: var(--ts-accent-lime);
+  box-shadow: 0 0 0 3px rgba(223,255,79,0.08);
+}
+
+.ts-input-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ts-text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.ts-btn-primary {
+  background: var(--ts-accent-lime);
+  color: var(--ts-bg-primary);
+  border: none;
+  border-radius: var(--ts-radius);
+  padding: 14px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+
+.ts-btn-primary:hover { opacity: 0.88; }
+
+.ts-btn-secondary {
+  background: transparent;
+  color: var(--ts-text-muted);
+  border: 1px solid var(--ts-border-default);
+  border-radius: var(--ts-radius);
+  padding: 14px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.ts-btn-secondary:hover { border-color: rgba(255,255,255,0.25); }
+
+/* ============================================
+   BADGE
+   ============================================ */
+.ts-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 3px 10px;
+  border: 1px solid;
+}
+
+.ts-badge-lime  { color: var(--ts-accent-lime);  border-color: var(--ts-border-lime); }
+.ts-badge-green { color: var(--ts-accent-green); border-color: var(--ts-border-green); }
+
+/* ============================================
+   ALERT
+   ============================================ */
+.ts-alert-error {
+  background: rgba(255,68,68,0.12);
+  border: 1px solid rgba(255,68,68,0.3);
+  border-radius: var(--ts-radius);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #ff8888;
+}
+
+/* ============================================
+   RESULT COMPONENTS
+   ============================================ */
+.ts-stat-box {
+  background: var(--ts-bg-primary);
+  border-radius: var(--ts-radius);
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.ts-stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ts-text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ts-stat-value {
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.ts-divider {
+  border-color: var(--ts-border-default);
+  margin: 20px 0;
+}
+
+.ts-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.ts-totals-box {
+  background: var(--ts-bg-primary);
+  border-radius: var(--ts-radius);
+  padding: 20px 24px;
+}
+
+.ts-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ts-total-row:last-child { margin-bottom: 0; }
+
+.ts-total-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ts-text-muted);
+}
+
+.ts-total-value {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ============================================
+   HOME — App cards
+   ============================================ */
+.ts-app-card {
+  background: var(--ts-bg-secondary);
+  border: 1px solid var(--ts-border-default);
+  border-radius: var(--ts-radius-lg);
+  padding: 28px 24px;
+  text-decoration: none;
+  color: var(--ts-text-primary);
+  display: block;
+  height: 100%;
+  transition: border-color 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.ts-app-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+  color: var(--ts-text-primary);
+}
+
+.ts-app-card-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.ts-empty-state {
+  background: var(--ts-bg-secondary);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: var(--ts-radius-lg);
+  padding: 60px 32px;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ts-empty-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.ts-footer {
+  border-top: 1px solid var(--ts-border-default);
+  padding: 24px 0;
+  margin-top: 40px;
+}
+
+.ts-footer-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ts-text-faint);
+  letter-spacing: 1px;
 }

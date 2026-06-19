@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cromo Tenis - Sports Tech</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #0a0e27;
+    }
+
+    .card {
+      width: 1080px;
+      height: 1920px;
+      background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 40%, #d2691e 100%);
+      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -20%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header {
+      background: linear-gradient(90deg, rgba(76, 175, 80, 0.12) 0%, rgba(76, 175, 80, 0.05) 100%);
+      border-bottom: 2px solid #dfff4f;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 60px 40px;
+      font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+    }
+
+    .datetime {
+      font-family: 'Space Mono', monospace;
+      color: #4CAF50;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-top: 25px;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .match-container {
+      position: relative;
+      z-index: 1;
+      padding: 60px 50px;
+      text-align: center;
+    }
+
+    .match {
+      color: #FFFFFF;
+      font-size: 5.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+    }
+
+    .vs {
+      font-size: 2rem;
+      color: #4CAF50;
+      display: block;
+      margin: 25px 0;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .prediction-box {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(76, 175, 80, 0.08) 100%);
+      border: 2px solid #dfff4f;
+      margin: 0 60px;
+      border-radius: 16px;
+      padding: 50px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .prediction-label {
+      font-family: 'Space Mono', monospace;
+      color: #4CAF50;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .prediction-winner {
+      color: #FFFFFF;
+      font-size: 4.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .footer-stats {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 60px;
+      margin-bottom: 60px;
+      gap: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.12) 0%, rgba(76, 175, 80, 0.06) 100%);
+      border: 1.5px solid #dfff4f;
+      color: #FFFFFF;
+      flex: 1;
+      border-radius: 12px;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #4CAF50;
+      margin-bottom: 15px;
+    }
+
+    .stat-value {
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div>
+      <div class="header">{{TORNEO}}</div>
+      <div class="datetime">{{FECHA}} • {{HORA}}</div>
+    </div>
+
+    <div class="match-container">
+      <div class="match">
+        {{JUGADOR1}}
+        <span class="vs">VS</span>
+        {{JUGADOR2}}
+      </div>
+    </div>
+
+    <div class="prediction-box">
+      <div class="prediction-label">Predicción</div>
+      <div class="prediction-winner">{{GANADOR}}</div>
+    </div>
+
+    <div class="footer-stats">
+      <div class="stat-box">
+        <div class="stat-label">Probabilidad</div>
+        <div class="stat-value">{{PROBABILIDAD}}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Cuota</div>
+        <div class="stat-value">{{CUOTA}}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

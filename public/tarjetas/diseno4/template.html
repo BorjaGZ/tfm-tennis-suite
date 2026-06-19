@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tennis Card - White Wimbledon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: #f0ede6; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card {
+      width: 1080px; height: 1920px;
+      background: linear-gradient(160deg, #fafaf7 0%, #f0ede6 60%, #e8e4d8 100%);
+      font-family: 'Inter', sans-serif;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .card::before {
+      content: ''; position: absolute;
+      top: -150px; right: -150px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,80,40,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .top-bar {
+      height: 6px;
+      background: linear-gradient(90deg, #005028, #007a3d, #005028);
+    }
+    .header {
+      padding: 70px 80px 0;
+      position: relative; z-index: 1;
+    }
+    .brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 26px; font-weight: 700;
+      color: #005028; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 50px; display: block;
+    }
+    .tournament {
+      font-size: 2.2rem; font-weight: 800;
+      color: #1a1a1a; text-transform: uppercase;
+      letter-spacing: 3px; margin-bottom: 20px; min-height: 44px;
+    }
+    .datetime {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.6rem; color: #005028; letter-spacing: 2px;
+    }
+    .divider {
+      margin: 60px 80px; height: 2px;
+      background: linear-gradient(90deg, #005028, rgba(0,80,40,0.1), transparent);
+      position: relative; z-index: 1;
+    }
+    .match-section { padding: 0 80px; position: relative; z-index: 1; }
+    .match-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.2rem; color: rgba(0,0,0,0.25);
+      letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 36px; display: block;
+    }
+    .player {
+      font-size: 5.5rem; font-weight: 900;
+      color: #1a1a1a; text-transform: uppercase;
+      letter-spacing: -3px; line-height: 1.0; min-height: 90px;
+    }
+    .vs-row { display: flex; align-items: center; gap: 28px; margin: 40px 0; }
+    .vs-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.8rem; font-weight: 700;
+      color: #005028; letter-spacing: 4px;
+    }
+    .vs-line { flex: 1; height: 2px; background: rgba(0,80,40,0.15); }
+    .prediction-box {
+      margin: 60px 80px;
+      border: 2px solid #005028;
+      border-radius: 20px; padding: 50px 60px;
+      background: rgba(0,80,40,0.05);
+      position: relative; z-index: 1;
+    }
+    .prediction-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.4rem; color: #005028;
+      letter-spacing: 4px; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .prediction-winner {
+      font-size: 4rem; font-weight: 900;
+      color: #1a1a1a; text-transform: uppercase;
+      letter-spacing: -1px; min-height: 64px;
+    }
+    .stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 24px; margin: 0 80px; position: relative; z-index: 1;
+    }
+    .stat-box {
+      border: 2px solid #005028;
+      border-radius: 16px; padding: 40px 30px;
+      text-align: center; background: rgba(0,80,40,0.04);
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.3rem; color: #005028;
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px;
+    }
+    .stat-value { font-size: 4.5rem; font-weight: 900; color: #005028; }
+    .footer {
+      padding: 50px 80px 70px;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      position: relative; z-index: 1;
+    }
+    .footer-brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.3rem; color: rgba(0,0,0,0.15);
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+    .footer-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.2rem; color: rgba(0,80,40,0.3); letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="top-bar"></div>
+    <div class="header">
+      <span class="brand">🎾 Tennis Suite</span>
+      <div class="tournament">{{TORNEO}}</div>
+      <div class="datetime">{{FECHA}} · {{HORA}}</div>
+    </div>
+    <div class="divider"></div>
+    <div class="match-section">
+      <span class="match-label">Partido</span>
+      <div class="player">{{JUGADOR1}}</div>
+      <div class="vs-row">
+        <span class="vs-text">VS</span>
+        <div class="vs-line"></div>
+      </div>
+      <div class="player">{{JUGADOR2}}</div>
+    </div>
+    <div class="prediction-box">
+      <div class="prediction-label">Predicción</div>
+      <div class="prediction-winner">{{GANADOR}}</div>
+    </div>
+    <div class="stats">
+      <div class="stat-box">
+        <div class="stat-label">Probabilidad</div>
+        <div class="stat-value">{{PROBABILIDAD}}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Cuota</div>
+        <div class="stat-value">{{CUOTA}}</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-brand">Tennis Suite</span>
+      <span class="footer-tag">#TennisPredictions</span>
+    </div>
+  </div>
+</body>
+</html>
