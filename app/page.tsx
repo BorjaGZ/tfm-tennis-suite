@@ -55,6 +55,15 @@ const apps = [
     accentClass: "ts-card-accent-lime",
     icon: "📰",
   },
+  {
+    href: "/analizador-partido",
+    title: "Analizador de Partido",
+    desc: "Sube las estadísticas de ambos jugadores y el modelo V11.0 predice el ganador.",
+    badge: "IA · Gemini",
+    badgeClass: "ts-badge-green",
+    accentClass: "ts-card-accent-green",
+    icon: "🤖",
+  },
 ];
 
 export default function Home() {
