@@ -46,6 +46,15 @@ const apps = [
     accentClass: "ts-card-accent-lime",
     icon: "📈",
   },
+  {
+    href: "/ultimas-noticias",
+    title: "Últimas Noticias",
+    desc: "Noticias del día sobre tenis obtenidas en tiempo real con Gemini AI.",
+    badge: "IA · Tiempo Real",
+    badgeClass: "ts-badge-lime",
+    accentClass: "ts-card-accent-lime",
+    icon: "📰",
+  },
 ];
 
 export default function Home() {
