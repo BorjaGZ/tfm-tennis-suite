@@ -37,6 +37,15 @@ const apps = [
     accentClass: "ts-card-accent-lime",
     icon: "🎨",
   },
+  {
+    href: "/calculadora-value",
+    title: "Calculadora de Value",
+    desc: "Introduce la probabilidad y la cuota para saber si hay value y qué stake aplicar.",
+    badge: "Value Bet",
+    badgeClass: "ts-badge-lime",
+    accentClass: "ts-card-accent-lime",
+    icon: "📈",
+  },
 ];
 
 export default function Home() {

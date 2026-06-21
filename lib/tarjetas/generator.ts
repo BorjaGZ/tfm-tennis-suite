@@ -51,6 +51,30 @@ export const DISENOS: Diseno[] = [
     acento: "#005028",
     bgColor: "#f0ede6",
   },
+  {
+    id: "diseno5",
+    nombre: "Golden Slam",
+    descripcion: "Negro profundo con acentos dorados. Estilo lujo y elegancia.",
+    templatePath: "/tarjetas/diseno5/template.html",
+    acento: "#d4af37",
+    bgColor: "#1a1400",
+  },
+  {
+    id: "diseno6",
+    nombre: "Purple Night",
+    descripcion: "Morado oscuro con acentos violeta. Estilo moderno y vibrante.",
+    templatePath: "/tarjetas/diseno6/template.html",
+    acento: "#c084fc",
+    bgColor: "#180d2e",
+  },
+  {
+    id: "diseno7",
+    nombre: "Hard Court",
+    descripcion: "Azul pista dura con acento rojo. Estilo US Open.",
+    templatePath: "/tarjetas/diseno7/template.html",
+    acento: "#60a5fa",
+    bgColor: "#002244",
+  },
 ];
 
 export async function cargarTemplate(templatePath: string): Promise<string> {
