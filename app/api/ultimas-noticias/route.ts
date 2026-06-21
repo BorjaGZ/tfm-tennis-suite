@@ -46,6 +46,6 @@ export async function GET() {
     return NextResponse.json(data);
   } catch (e: any) {
     console.error("Error Gemini:", e);
-    return NextResponse.json({ error: e.message ?? "Error desconocido.", detalle: e.toString() }, { status: 500 });
+        return NextResponse.json({ error: "Error al obtener noticias." }, { status: 500 });
   }
 }
