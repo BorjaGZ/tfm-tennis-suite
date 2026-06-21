@@ -71,6 +71,14 @@ Noticias del día sobre tenis obtenidas en tiempo real mediante Gemini AI.
 - Muestra 6 noticias con titular, resumen y categoría (ATP / WTA / Grand Slam / Otro)
 - Botón de actualización manual
 
+### 7. 🤖 Analizador de Partido
+Predice el ganador de un partido de tenis en tierra batida usando el Modelo Tierra Batida y Gemini 2.5 Flash.
+
+- Sube dos capturas de estadísticas: todas las superficies (referencia secundaria) y tierra batida (fuente primaria)
+- Gemini ejecuta el Modelo Tierra Batida aplicando las 7 métricas ponderadas, modificadores contextuales y búsqueda en tiempo real con Google Search
+- Devuelve el ganador estimado y la probabilidad con nivel de confianza
+- El modelo es intercambiable: basta con sustituir `data/modelo_tierra_batida.md` para actualizar a una nueva versión sin tocar código
+
 ---
 
 ## 🛠️ Stack tecnológico
@@ -125,7 +133,9 @@ tfm-tennis-suite/
 │       └── diseno7/template.html       # Hard Court
 └── data/                               # Archivos Excel subidos por el usuario (generado en runtime)
     ├── estadisticas.xlsx
-    └── entrenamiento_modelo.xlsx
+    ├── entrenamiento_modelo.xlsx
+    ├── prompt_ejecucion.md             # Prompt fijo de ejecución del modelo
+    └── modelo_tierra_batida.md         # Modelo activo (intercambiable sin tocar código)    
 ```
 
 ---
@@ -306,6 +316,19 @@ Consulta Gemini 2.5 Flash con Google Search para obtener las 6 noticias más imp
       "categoria": "ATP"
     }
   ]
+}
+```
+
+### `POST /api/analizador-partido`
+Recibe dos imágenes de estadísticas, carga el prompt y el modelo desde `data/`, y ejecuta el análisis con Gemini 2.5 Flash.
+
+**Body:** `FormData` con campos `imagen1` e `imagen2` (imágenes PNG/JPG).
+
+**Respuesta:**
+```json
+{
+  "ganador": "Denis Yevseyev",
+  "probabilidad": 54
 }
 ```
 
