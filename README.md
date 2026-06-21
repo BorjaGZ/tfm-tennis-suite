@@ -63,6 +63,14 @@ Determina si una apuesta tiene value y qué stake aplicar.
 - Se integra automáticamente con el Super Analizador para usar los rangos reales del modelo
 - Recomienda el stake óptimo según los rangos calculados
 
+### 6. 📰 Últimas Noticias
+Noticias del día sobre tenis obtenidas en tiempo real mediante Gemini AI.
+
+- Consulta automática al cargar la página
+- Usa Gemini 2.5 Flash con Google Search (Grounding) para obtener noticias reales del día
+- Muestra 6 noticias con titular, resumen y categoría (ATP / WTA / Grand Slam / Otro)
+- Botón de actualización manual
+
 ---
 
 ## 🛠️ Stack tecnológico
@@ -76,6 +84,7 @@ Determina si una apuesta tiene value y qué stake aplicar.
 | **xlsx** | Lectura y escritura de archivos Excel |
 | **html2canvas** | Generación de imágenes PNG desde HTML |
 | **Google Fonts** | Tipografías Inter y Space Mono |
+| **Gemini 2.5 Flash (Google AI)** | Noticias en tiempo real con Google Search |
 
 ---
 
@@ -282,6 +291,23 @@ Comprueba si existe el Excel y ejecuta la selección 3-3-3.
 Sube o reemplaza el archivo `entrenamiento_modelo.xlsx`.
 
 **Body:** `FormData` con campo `file` (archivo xlsx).
+
+### `GET /api/ultimas-noticias`
+Consulta Gemini 2.5 Flash con Google Search para obtener las 6 noticias más importantes del tenis del día.
+
+**Respuesta:**
+```json
+{
+  "fecha": "21 de junio de 2026",
+  "noticias": [
+    {
+      "titular": "...",
+      "resumen": "...",
+      "categoria": "ATP"
+    }
+  ]
+}
+```
 
 ---
 
