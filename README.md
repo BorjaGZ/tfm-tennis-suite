@@ -25,11 +25,15 @@ Todo el desarrollo ha sido realizado con asistencia de Inteligencia Artificial, 
 ## 🚀 Mini aplicaciones
 
 ### 1. 💰 Gestor de Stakes
-Calculadora de distribución de bankroll entre partidos según niveles de stake.
+Calculadora de stakes basada en porcentaje del bankroll con control de límites de recalculo y evolución histórica.
 
-- Introduce el dinero disponible y el número de partidos por stake (S1, S2, S3)
-- Calcula automáticamente la distribución óptima en modo enteros o decimales
-- Muestra el desglose completo y el dinero sobrante
+- Introduce tu bankroll disponible y calcula automáticamente los tres niveles de stake
+- Stake 1 = 1% del bank · Stake 2 = 2% · Stake 3 = 3% — redondeados a 1 decimal
+- Muestra los límites de recalculo: +10% (límite superior) y -10% (límite inferior)
+- Comprobador de bank actual: introduce el valor al cierre de jornada y avisa si se ha superado algún límite con opción de recalculo automático
+- Barra visual de posición del bank actual entre los dos límites
+- **EXPORTAR** — guarda el registro actual en `data/gestor_stakes.xlsx` con fecha, bank y stakes
+- **VER HISTORIAL** — muestra la evolución completa del bankroll desde el Excel
 
 ### 2. 📊 Super Analizador
 Analiza un archivo Excel de estadísticas históricas y genera los rangos óptimos de probabilidad por stake.
@@ -135,7 +139,8 @@ tfm-tennis-suite/
     ├── estadisticas.xlsx
     ├── entrenamiento_modelo.xlsx
     ├── prompt_ejecucion.md             # Prompt fijo de ejecución del modelo
-    └── modelo_tierra_batida.md         # Modelo activo (intercambiable sin tocar código)    
+    ├── modelo_tierra_batida.md         # Modelo activo (intercambiable sin tocar código)    
+    ├── gestor_stakes.xlsx              # Historial de evolución del bankroll 
 ```
 
 ---
@@ -331,6 +336,12 @@ Recibe dos imágenes de estadísticas, carga el prompt y el modelo desde `data/`
   "probabilidad": 54
 }
 ```
+
+### `GET /api/gestor-stakes`
+Lee el historial completo de registros desde `data/gestor_stakes.xlsx`.
+
+### `POST /api/gestor-stakes`
+Añade una nueva fila al historial con fecha actual, bank y stakes calculados.
 
 ---
 
