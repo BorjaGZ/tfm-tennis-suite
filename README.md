@@ -39,9 +39,11 @@ Calculadora de stakes basada en porcentaje del bankroll con control de límites 
 Analiza un archivo Excel de estadísticas históricas y genera los rangos óptimos de probabilidad por stake.
 
 - Sube o reemplaza tu archivo `estadisticas.xlsx` desde la propia web
-- Busca combinaciones de 3 rangos no solapados (S1, S1.5, S2) que maximicen el beneficio con ≥60% de acierto
+- Busca combinaciones de 3 rangos no solapados (S1, S2, S3) que maximicen el beneficio con ≥60% de acierto
 - Modo fallback automático si no se alcanzan los objetivos
-- Genera una fórmula Excel lista para copiar y pegar
+- Genera una fórmula Excel lista para copiar y pegar con dos ramas:
+  - **Rama normal**: umbrales directos por rango de probabilidad
+  - **Rama ID**: para eventos dobles (nombre empieza por "ID"), los umbrales se calculan como el cuadrado de los normales (probabilidad conjunta de dos partidos)
 
 ### 3. 🧠 Entrenamiento Modelo
 Selecciona los 9 partidos clave para el reentrenamiento del modelo predictivo siguiendo la metodología 3-3-3.

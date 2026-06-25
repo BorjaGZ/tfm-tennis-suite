@@ -248,9 +248,9 @@ export default function SuperAnalizador() {
                     </thead>
                     <tbody>
                       {[
-                        { label: "STAKE 1",   m: analisis.estrategia.m1,  color: "var(--ts-accent-lime)" },
-                        { label: "STAKE 1.5", m: analisis.estrategia.m15, color: "var(--ts-accent-green)" },
-                        { label: "STAKE 2",   m: analisis.estrategia.m2,  color: "var(--ts-accent-green)" },
+                        { label: "STAKE 1", m: analisis.estrategia.m1,  color: "var(--ts-accent-lime)" },
+                        { label: "STAKE 2", m: analisis.estrategia.m15, color: "var(--ts-accent-green)" },
+                        { label: "STAKE 3", m: analisis.estrategia.m2,  color: "var(--ts-accent-green)" },
                       ].map(({ label, m, color }) => (
                         <tr key={label} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
                           <td style={{ padding: "12px", fontFamily: "'Space Mono', monospace", fontSize: "12px", fontWeight: 700, color }}>{label}</td>
