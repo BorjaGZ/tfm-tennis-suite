@@ -132,44 +132,45 @@ export default function GeneradorTarjetas() {
               </div>
             </div>
 
-            {/* Selector de diseño */}
+            {/* Selector de diseño — dropdown */}
             <div className="ts-card mb-4">
-              <span className="ts-label ts-label-muted mb-4 d-block">Elige un diseño</span>
-              <div className="d-flex flex-column gap-3">
+              <span className="ts-label ts-label-muted mb-3 d-block">Elige un diseño</span>
+              <select
+                value={disenoId}
+                onChange={(e) => setDisenoId(e.target.value)}
+                className="ts-input"
+                style={{ cursor: "pointer", appearance: "auto" }}
+              >
                 {DISENOS.map((d) => (
-                  <label
-                    key={d.id}
-                    className="d-flex align-items-start gap-3"
-                    style={{ cursor: "pointer" }}
-                  >
-                    <input
-                      type="radio"
-                      name="diseno"
-                      value={d.id}
-                      checked={disenoId === d.id}
-                      onChange={() => setDisenoId(d.id)}
-                      style={{ marginTop: "4px", accentColor: d.acento }}
-                    />
-                    <div
-                      style={{
-                        flex: 1,
-                        background: "var(--ts-bg-primary)",
-                        border: disenoId === d.id ? `1px solid ${d.acento}` : "1px solid var(--ts-border-default)",
-                        borderRadius: "var(--ts-radius)",
-                        padding: "14px 16px",
-                        transition: "border-color 0.2s",
-                      }}
-                    >
-                      <p style={{ fontWeight: 700, fontSize: "14px", margin: "0 0 4px 0", color: disenoId === d.id ? d.acento : "var(--ts-text-primary)" }}>
-                        {d.nombre}
-                      </p>
-                      <p style={{ fontSize: "12px", color: "var(--ts-text-muted)", margin: 0 }}>
-                        {d.descripcion}
-                      </p>
-                    </div>
-                  </label>
+                  <option key={d.id} value={d.id}>
+                    {d.nombre} — {d.descripcion}
+                  </option>
                 ))}
-              </div>
+              </select>
+              {/* Preview del diseño seleccionado */}
+              {(() => {
+                const d = DISENOS.find((d) => d.id === disenoId);
+                if (!d) return null;
+                return (
+                  <div style={{
+                    marginTop: "12px",
+                    background: d.bgColor,
+                    border: `1px solid ${d.acento}44`,
+                    borderLeft: `3px solid ${d.acento}`,
+                    borderRadius: "var(--ts-radius)",
+                    padding: "12px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                  }}>
+                    <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: d.acento, flexShrink: 0 }} />
+                    <div>
+                      <p style={{ fontWeight: 700, fontSize: "13px", margin: "0 0 2px 0", color: d.acento }}>{d.nombre}</p>
+                      <p style={{ fontSize: "11px", color: "var(--ts-text-muted)", margin: 0 }}>{d.descripcion}</p>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Error */}

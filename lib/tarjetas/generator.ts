@@ -75,6 +75,30 @@ export const DISENOS: Diseno[] = [
     acento: "#60a5fa",
     bgColor: "#002244",
   },
+  {
+    id: "diseno8",
+    nombre: "Aerial Grass",
+    descripcion: "Verde césped con líneas de pista. Inspirado en hierba desde el aire.",
+    templatePath: "/tarjetas/diseno8/template.html",
+    acento: "#22c55e",
+    bgColor: "#0f2a0f",
+  },
+  {
+    id: "diseno9",
+    nombre: "Electric Blue",
+    descripcion: "Azul eléctrico intenso con detalles amarillo neón. Estilo acción.",
+    templatePath: "/tarjetas/diseno9/template.html",
+    acento: "#38bdf8",
+    bgColor: "#041a2e",
+  },
+  {
+    id: "diseno10",
+    nombre: "Clay Dust",
+    descripcion: "Tierra batida oscura con tonos arena y luz cálida dorada.",
+    templatePath: "/tarjetas/diseno10/template.html",
+    acento: "#d97706",
+    bgColor: "#2a1a0a",
+  },
 ];
 
 export async function cargarTemplate(templatePath: string): Promise<string> {
