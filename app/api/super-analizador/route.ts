@@ -45,29 +45,34 @@ function calcularMetricas(
 }
 
 function buscarEstrategia(
-  registros: Registro[], cuotaMin: number, minAcierto: number
+  registros: Registro[], cuotaMin: number,
+  minS1: number, minS2: number, minS3: number
 ): Estrategia | null {
   const probs = [...new Set(registros.map((r) => r.probabilidad))].sort((a, b) => a - b);
   const MIN_APUESTAS = 5;
 
-  const validos: Record<number, { m: Metricas; i: number; j: number }[]> = { 1: [], 1.5: [], 2: [] };
+  const validos: Record<string, { m: Metricas; i: number; j: number }[]> = {
+    s1: [], s2: [], s3: []
+  };
 
   for (let i = 0; i < probs.length; i++) {
     for (let j = i; j < probs.length; j++) {
-      for (const stake of [1, 1.5, 2]) {
-        const m = calcularMetricas(registros, stake, probs[i], probs[j], cuotaMin, minAcierto, MIN_APUESTAS);
-        if (m) validos[stake].push({ m, i, j });
-      }
+      const mS1 = calcularMetricas(registros, 1,   probs[i], probs[j], cuotaMin, minS1, MIN_APUESTAS);
+      const mS2 = calcularMetricas(registros, 1.5, probs[i], probs[j], cuotaMin, minS2, MIN_APUESTAS);
+      const mS3 = calcularMetricas(registros, 2,   probs[i], probs[j], cuotaMin, minS3, MIN_APUESTAS);
+      if (mS1) validos.s1.push({ m: mS1, i, j });
+      if (mS2) validos.s2.push({ m: mS2, i, j });
+      if (mS3) validos.s3.push({ m: mS3, i, j });
     }
   }
 
   let mejorTotal = -Infinity;
   let mejorCombo: { m1: Metricas; m15: Metricas; m2: Metricas } | null = null;
 
-  for (const { m: m1, j: j1 } of validos[1]) {
-    for (const { m: m15, i: i15, j: j15 } of validos[1.5]) {
+  for (const { m: m1, j: j1 } of validos.s1) {
+    for (const { m: m15, i: i15, j: j15 } of validos.s2) {
       if (i15 <= j1) continue;
-      for (const { m: m2, i: i2 } of validos[2]) {
+      for (const { m: m2, i: i2 } of validos.s3) {
         if (i2 <= j15) continue;
         const total = m1.beneficio + m15.beneficio + m2.beneficio;
         if (total > mejorTotal) { mejorTotal = total; mejorCombo = { m1, m15, m2 }; }
@@ -79,7 +84,7 @@ function buscarEstrategia(
 
   const { m1, m15, m2 } = mejorCombo;
   const formula = generarFormula(m1, m15, m2, cuotaMin);
-  return { m1, m15, m2, beneficioTotal: mejorTotal, formula, exito: minAcierto > 0 };
+  return { m1, m15, m2, beneficioTotal: mejorTotal, formula, exito: minS1 > 0 };
 }
 
 function generarFormula(m1: Metricas, m15: Metricas, m2: Metricas, cuotaMin: number): string {
@@ -87,42 +92,49 @@ function generarFormula(m1: Metricas, m15: Metricas, m2: Metricas, cuotaMin: num
   const dec = (v: number) => v.toFixed(2).replace(".", ",");
   const cond = `$D2>=${dec(cuotaMin)}`;
 
-  // Umbrales normales
-  const s3 = pct(m2.pIni);
-  const s2 = pct(m15.pIni);
-  const s1 = pct(m1.pIni);
+  // Umbrales normales — respetan exactamente pIni y pFin de cada tramo
+  const s1ini = pct(m1.pIni);  const s1fin = pct(m1.pFin);
+  const s2ini = pct(m15.pIni); const s2fin = pct(m15.pFin);
+  const s3ini = pct(m2.pIni);  const s3fin = pct(m2.pFin);
 
-  // Umbrales ID (cuadrado de los normales)
-  const s3id = pct(m2.pIni * m2.pIni);
-  const s2id = pct(m15.pIni * m15.pIni);
-  const s1id = pct(m1.pIni * m1.pIni);
+  // Umbrales ID — cuadrado de los límites del tramo
+  const s1ini_id = pct(m1.pIni * m1.pIni);   const s1fin_id = pct(m1.pFin * m1.pFin);
+  const s2ini_id = pct(m15.pIni * m15.pIni); const s2fin_id = pct(m15.pFin * m15.pFin);
+  const s3ini_id = pct(m2.pIni * m2.pIni);   const s3fin_id = pct(m2.pFin * m2.pFin);
 
   const ramaID = (
-    `IF($B2>=${s3id};"STAKE 3";` +
-    `IF($B2>=${s2id};"STAKE 2";` +
-    `IF($B2>=${s1id};"STAKE 1";"NO APOSTAR")))`
+    `IF(AND($B2>=${s3ini_id};$B2<=${s3fin_id});"STAKE 3";` +
+    `IF(AND($B2>=${s2ini_id};$B2<=${s2fin_id});"STAKE 2";` +
+    `IF(AND($B2>=${s1ini_id};$B2<=${s1fin_id});"STAKE 1";"NO APOSTAR")))`
   );
 
   const ramaNormal = (
-    `IF($B2>=${s3};"STAKE 3";` +
-    `IF($B2>=${s2};"STAKE 2";` +
-    `IF($B2>=${s1};"STAKE 1";"NO APOSTAR")))`
+    `IF(AND($B2>=${s3ini};$B2<=${s3fin});"STAKE 3";` +
+    `IF(AND($B2>=${s2ini};$B2<=${s2fin});"STAKE 2";` +
+    `IF(AND($B2>=${s1ini};$B2<=${s1fin});"STAKE 1";"NO APOSTAR")))`
   );
 
   return `=IF(LEFT($A2;2)="ID";${ramaID};${ramaNormal})`;
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const existe = fs.existsSync(EXCEL_PATH);
   if (!existe) return NextResponse.json({ existe: false });
 
+  // Leer umbrales de acierto desde query params (por defecto 60%)
+  const { searchParams } = new URL(req.url);
+  const minS1 = parseFloat(searchParams.get("minS1") ?? "60");
+  const minS2 = parseFloat(searchParams.get("minS2") ?? "60");
+  const minS3 = parseFloat(searchParams.get("minS3") ?? "60");
+
   try {
     const registros = leerExcel(EXCEL_PATH);
-    let estrategia  = buscarEstrategia(registros, 1.2, 60);
+
+    let estrategia  = buscarEstrategia(registros, 1.2, minS1, minS2, minS3);
     let exito       = true;
 
     if (!estrategia) {
-      estrategia = buscarEstrategia(registros, 1.2, 0);
+      estrategia = buscarEstrategia(registros, 1.2, 0, 0, 0);
       exito      = false;
     }
 
@@ -132,6 +144,7 @@ export async function GET() {
       existe: true,
       total: registros.length,
       estrategia,
+      umbrales: { minS1, minS2, minS3 },
     });
   } catch {
     return NextResponse.json({ error: "Error al procesar el Excel." }, { status: 500 });
