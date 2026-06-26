@@ -18,8 +18,8 @@ export default function AnalizadorPartido() {
   const [resultado, setResultado] = useState<Resultado | null>(null);
   const [error, setError]         = useState("");
 
-  const fileRef1 = useRef<HTMLInputElement>(null);
-  const fileRef2 = useRef<HTMLInputElement>(null);
+  const fileRef1 = useRef<HTMLInputElement | null>(null);
+  const fileRef2 = useRef<HTMLInputElement | null>(null);
 
   const onFile = (e: React.ChangeEvent<HTMLInputElement>, num: 1 | 2) => {
     const file = e.target.files?.[0];
@@ -74,7 +74,7 @@ export default function AnalizadorPartido() {
   const ZonaSubida = ({ num, preview, fileRef, label }: {
     num: 1 | 2;
     preview: string | null;
-    fileRef: React.RefObject<HTMLInputElement>;
+    fileRef: React.RefObject<HTMLInputElement | null>;
     label: string;
   }) => (
     <div>
