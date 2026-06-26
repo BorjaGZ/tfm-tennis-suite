@@ -59,7 +59,7 @@ Genera tarjetas visuales de partidos para compartir en redes sociales.
 
 - Formulario con los datos del partido (jugadores, torneo, fecha, hora, ganador, probabilidad, cuota)
 - Todos los campos son opcionales
-- 7 diseños disponibles con selector visual
+- **10 diseños disponibles** con selector dropdown y preview del diseño seleccionado
 - Genera la tarjeta en formato PNG 1080×1920 (story 9:16) lista para descargar
 
 ### 5. 📈 Calculadora de Value
@@ -182,16 +182,6 @@ La aplicación utiliza un design system propio definido en `globals.css`, basado
 ## 🗂️ Diseños de tarjetas
 
 Los templates HTML se almacenan en `public/tarjetas/` y utilizan placeholders con la sintaxis `{{CAMPO}}` que son sustituidos en runtime por los valores del formulario.
-
-| ID | Nombre | Estilo |
-|---|---|---|
-| diseno1 | Dark Pro | Oscuro con degradado marrón y acentos lima |
-| diseno2 | Night Blue | Azul marino con acentos cyan |
-| diseno3 | Red Clay | Tierra batida, tonos naranja/rojo |
-| diseno4 | White Wimbledon | Fondo crema, verde Wimbledon clásico |
-| diseno5 | Golden Slam | Negro con acentos dorados |
-| diseno6 | Purple Night | Morado oscuro con acentos violeta |
-| diseno7 | Hard Court | Azul pista dura con acento rojo, estilo US Open |
 
 ### Placeholders disponibles
 

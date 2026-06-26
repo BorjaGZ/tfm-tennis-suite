@@ -1,14 +1,14 @@
 import Link from "next/link";
 
-const apps = [
+const appsFilaSuperior = [
   {
-    href: "/gestor-stakes",
-    title: "Gestor de Stakes",
-    desc: "Distribuye tu bankroll entre partidos según niveles de stake automáticamente.",
-    badge: "Calculadora",
-    badgeClass: "ts-badge-lime",
-    accentClass: "ts-card-accent-lime",
-    icon: "💰",
+    href: "/analizador-partido",
+    title: "Analizador de Partido",
+    desc: "Sube las estadísticas de ambos jugadores y el modelo predice el ganador.",
+    badge: "IA · Gemini",
+    badgeClass: "ts-badge-green",
+    accentClass: "ts-card-accent-green",
+    icon: "🤖",
   },
   {
     href: "/super-analizador",
@@ -28,14 +28,17 @@ const apps = [
     accentClass: "ts-card-accent-green",
     icon: "🧠",
   },
+];
+
+const appsFilaInferior = [
   {
-    href: "/generador-tarjetas",
-    title: "Generador de Tarjetas",
-    desc: "Crea tarjetas visuales de partidos para compartir en redes sociales.",
-    badge: "Diseño",
+    href: "/gestor-stakes",
+    title: "Gestor de Stakes",
+    desc: "Calcula tus stakes según el bankroll y controla los límites de recalculo.",
+    badge: "Calculadora",
     badgeClass: "ts-badge-lime",
     accentClass: "ts-card-accent-lime",
-    icon: "🎨",
+    icon: "💰",
   },
   {
     href: "/calculadora-value",
@@ -47,6 +50,15 @@ const apps = [
     icon: "📈",
   },
   {
+    href: "/generador-tarjetas",
+    title: "Generador de Tarjetas",
+    desc: "Crea tarjetas visuales de partidos para compartir en redes sociales.",
+    badge: "Diseño",
+    badgeClass: "ts-badge-lime",
+    accentClass: "ts-card-accent-lime",
+    icon: "🎨",
+  },
+  {
     href: "/ultimas-noticias",
     title: "Últimas Noticias",
     desc: "Noticias del día sobre tenis obtenidas en tiempo real con Gemini AI.",
@@ -54,15 +66,6 @@ const apps = [
     badgeClass: "ts-badge-lime",
     accentClass: "ts-card-accent-lime",
     icon: "📰",
-  },
-  {
-    href: "/analizador-partido",
-    title: "Analizador de Partido",
-    desc: "Sube las estadísticas de ambos jugadores y el modelo V11.0 predice el ganador.",
-    badge: "IA · Gemini",
-    badgeClass: "ts-badge-green",
-    accentClass: "ts-card-accent-green",
-    icon: "🤖",
   },
 ];
 
@@ -94,8 +97,32 @@ export default function Home() {
 
       {/* Grid de apps */}
       <div className="container-xl px-4 py-5">
-        <div className="row g-4">
-          {apps.map((app) => (
+
+        {/* Fila superior — 4 apps principales */}
+        <div className="row g-4 mb-4">
+          {appsFilaSuperior.map((app) => (
+            <div key={app.href} className="col-12 col-sm-6 col-xl-4">
+              <Link href={app.href} className="ts-app-card">
+                <div className={app.accentClass} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px" }} />
+                <span className="ts-app-card-icon">{app.icon}</span>
+                <h2 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "8px" }}>
+                  {app.title}
+                </h2>
+                <p className="ts-text-muted-custom mb-3" style={{ fontSize: "13px", lineHeight: 1.6 }}>
+                  {app.desc}
+                </p>
+                <span className={`ts-badge ${app.badgeClass}`}>{app.badge}</span>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Separador */}
+        <div style={{ borderTop: "1px solid var(--ts-border-default)", margin: "8px 0 28px 0" }} />
+
+        {/* Fila inferior — 3 apps secundarias */}
+        <div className="row g-4 justify-content-center">
+          {appsFilaInferior.map((app) => (
             <div key={app.href} className="col-12 col-sm-6 col-xl-3">
               <Link href={app.href} className="ts-app-card">
                 <div className={app.accentClass} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px" }} />
@@ -111,6 +138,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+
       </div>
 
       {/* Footer */}
