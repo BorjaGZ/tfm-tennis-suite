@@ -13,7 +13,9 @@ export async function GET() {
   }
 
   try {
-    const res    = await fetch(blobInfo.url);
+    // Descargar y procesar
+    const { download } = await import("@vercel/blob");
+    const res    = await download(blobInfo.url);
     const buffer = await res.arrayBuffer();
     const wb     = XLSX.read(buffer, { type: "array" });
     const ws     = wb.Sheets[wb.SheetNames[0]];

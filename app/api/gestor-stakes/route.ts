@@ -13,8 +13,9 @@ export async function GET() {
   }
 
   try {
-    const res     = await fetch(blobInfo.url);
-    const buffer  = await res.arrayBuffer();
+    const { download } = await import("@vercel/blob");
+    const res    = await download(blobInfo.url);
+    const buffer = await res.arrayBuffer();
     const wb      = XLSX.read(buffer, { type: "array", cellDates: true });
     const ws      = wb.Sheets[wb.SheetNames[0]];
     const raw     = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
@@ -48,8 +49,9 @@ export async function POST(req: NextRequest) {
     // Intentar leer el existente
     try {
       const blobInfo = await head(BLOB_KEY);
-      const res      = await fetch(blobInfo.url);
-      const buffer   = await res.arrayBuffer();
+      const { download } = await import("@vercel/blob");
+      const res    = await download(blobInfo.url);
+      const buffer = await res.arrayBuffer();
       wb = XLSX.read(buffer, { type: "array", cellDates: true });
     } catch {
       wb = XLSX.utils.book_new();

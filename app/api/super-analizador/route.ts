@@ -117,8 +117,9 @@ export async function GET(req: NextRequest) {
     }
 
     // Descargar y procesar
-    const res     = await fetch(blobInfo.url);
-    const buffer  = await res.arrayBuffer();
+    const { download } = await import("@vercel/blob");
+    const res    = await download(blobInfo.url);
+    const buffer = await res.arrayBuffer();
     const registros = leerExcelBuffer(buffer);
 
     let estrategia = buscarEstrategia(registros, 1.2, minS1, minS2, minS3);
