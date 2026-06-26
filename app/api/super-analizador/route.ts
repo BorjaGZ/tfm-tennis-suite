@@ -143,7 +143,7 @@ export async function POST(req: NextRequest) {
     try { XLSX.read(buffer, { type: "buffer" }); }
     catch { return NextResponse.json({ error: "El archivo no es un Excel válido." }, { status: 400 }); }
 
-    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true });
+    await put(BLOB_KEY, buffer, { access: "private", allowOverwrite: true });
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error(e);

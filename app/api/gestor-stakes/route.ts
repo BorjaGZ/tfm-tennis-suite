@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     ]], { origin: -1 });
 
     const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
-    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true });
+    await put(BLOB_KEY, buffer, { access: "private", allowOverwrite: true });
 
     return NextResponse.json({ success: true });
   } catch {
