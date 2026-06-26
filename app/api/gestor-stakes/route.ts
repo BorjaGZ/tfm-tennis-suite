@@ -1,21 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
-import path from "path";
-import fs from "fs";
+import { put, head } from "@vercel/blob";
 
-const EXCEL_PATH = path.join(process.cwd(), "data", "gestor_stakes.xlsx");
+const BLOB_KEY = "gestor_stakes.xlsx";
 
-// ── GET — leer historial ───────────────────────────────────────────────────
 export async function GET() {
-  if (!fs.existsSync(EXCEL_PATH)) {
+  let blobInfo;
+  try {
+    blobInfo = await head(BLOB_KEY);
+  } catch {
     return NextResponse.json({ historial: [] });
   }
 
   try {
-    const buffer   = fs.readFileSync(EXCEL_PATH);
-    const wb       = XLSX.read(buffer, { type: "buffer", cellDates: true });
-    const ws       = wb.Sheets[wb.SheetNames[0]];
-    const raw      = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
+    const res     = await fetch(blobInfo.url);
+    const buffer  = await res.arrayBuffer();
+    const wb      = XLSX.read(buffer, { type: "array", cellDates: true });
+    const ws      = wb.Sheets[wb.SheetNames[0]];
+    const raw     = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
 
     const historial = raw.map((r) => ({
       fecha:          r["Fecha"] instanceof Date
@@ -35,20 +37,21 @@ export async function GET() {
   }
 }
 
-// ── POST — añadir fila al historial ───────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { bank, stake1, stake2, stake3, limiteSuperior, limiteInferior } = body;
-
     const fecha = new Date().toLocaleDateString("es-ES");
 
     let wb: XLSX.WorkBook;
 
-    if (fs.existsSync(EXCEL_PATH)) {
-      const buffer = fs.readFileSync(EXCEL_PATH);
-      wb = XLSX.read(buffer, { type: "buffer", cellDates: true });
-    } else {
+    // Intentar leer el existente
+    try {
+      const blobInfo = await head(BLOB_KEY);
+      const res      = await fetch(blobInfo.url);
+      const buffer   = await res.arrayBuffer();
+      wb = XLSX.read(buffer, { type: "array", cellDates: true });
+    } catch {
       wb = XLSX.utils.book_new();
       const ws = XLSX.utils.aoa_to_sheet([
         ["Fecha", "Bank", "Stake 1", "Stake 2", "Stake 3", "Límite Superior", "Límite Inferior"]
@@ -62,7 +65,7 @@ export async function POST(req: NextRequest) {
     ]], { origin: -1 });
 
     const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
-    fs.writeFileSync(EXCEL_PATH, buffer);
+    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true });
 
     return NextResponse.json({ success: true });
   } catch {

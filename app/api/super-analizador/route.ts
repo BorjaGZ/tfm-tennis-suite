@@ -1,20 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
-import path from "path";
-import fs from "fs";
+import { put, head } from "@vercel/blob";
 
-const DATA_DIR  = path.join(process.cwd(), "data");
-const EXCEL_PATH = path.join(DATA_DIR, "estadisticas.xlsx");
+const BLOB_KEY = "estadisticas.xlsx";
 
 interface Registro { probabilidad: number; cuota: number; resultado: string; }
 interface Metricas { total: number; aciertos: number; pctAcierto: number; beneficio: number; yield: number; pIni: number; pFin: number; }
 interface Estrategia { m1: Metricas; m15: Metricas; m2: Metricas; beneficioTotal: number; formula: string; exito: boolean; }
-interface ResultadoArchivo { nombre: string; total: number; estrategia: Estrategia | null; }
 
-function leerExcel(filePath: string): Registro[] {
-  const buffer = fs.readFileSync(filePath);
-  const wb = XLSX.read(buffer, { type: "buffer" });
-  const ws = wb.Sheets[wb.SheetNames[0]];
+function leerExcelBuffer(buffer: ArrayBuffer): Registro[] {
+  const wb  = XLSX.read(buffer, { type: "array" });
+  const ws  = wb.Sheets[wb.SheetNames[0]];
   const raw = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
   return raw.map((r) => ({
     probabilidad: parseFloat(String(r["Probabilidad"] ?? r["probabilidad"] ?? 0)),
@@ -31,16 +27,13 @@ function calcularMetricas(
     (r) => r.probabilidad >= pIni && r.probabilidad <= pFin && r.cuota >= cuotaMin
   );
   if (filtro.length < minApuestas) return null;
-
   const aciertos   = filtro.filter((r) => r.resultado === "SI").length;
   const pctAcierto = (aciertos / filtro.length) * 100;
   if (pctAcierto < minAcierto) return null;
-
   const ganancias = filtro.filter((r) => r.resultado === "SI").reduce((s, r) => s + r.cuota * stake, 0);
   const perdidas  = (filtro.length - aciertos) * stake;
   const beneficio = ganancias - aciertos * stake - perdidas;
   const yieldPct  = (beneficio / (filtro.length * stake)) * 100;
-
   return { total: filtro.length, aciertos, pctAcierto, beneficio, yield: yieldPct, pIni, pFin };
 }
 
@@ -50,10 +43,7 @@ function buscarEstrategia(
 ): Estrategia | null {
   const probs = [...new Set(registros.map((r) => r.probabilidad))].sort((a, b) => a - b);
   const MIN_APUESTAS = 5;
-
-  const validos: Record<string, { m: Metricas; i: number; j: number }[]> = {
-    s1: [], s2: [], s3: []
-  };
+  const validos: Record<string, { m: Metricas; i: number; j: number }[]> = { s1: [], s2: [], s3: [] };
 
   for (let i = 0; i < probs.length; i++) {
     for (let j = i; j < probs.length; j++) {
@@ -81,10 +71,8 @@ function buscarEstrategia(
   }
 
   if (!mejorCombo) return null;
-
   const { m1, m15, m2 } = mejorCombo;
-  const formula = generarFormula(m1, m15, m2, cuotaMin);
-  return { m1, m15, m2, beneficioTotal: mejorTotal, formula, exito: minS1 > 0 };
+  return { m1, m15, m2, beneficioTotal: mejorTotal, formula: generarFormula(m1, m15, m2, cuotaMin), exito: minS1 > 0 };
 }
 
 function generarFormula(m1: Metricas, m15: Metricas, m2: Metricas, cuotaMin: number): string {
@@ -92,61 +80,55 @@ function generarFormula(m1: Metricas, m15: Metricas, m2: Metricas, cuotaMin: num
   const dec = (v: number) => v.toFixed(2).replace(".", ",");
   const cond = `$D2>=${dec(cuotaMin)}`;
 
-  // Umbrales normales — respetan exactamente pIni y pFin de cada tramo
-  const s1ini = pct(m1.pIni);  const s1fin = pct(m1.pFin);
-  const s2ini = pct(m15.pIni); const s2fin = pct(m15.pFin);
-  const s3ini = pct(m2.pIni);  const s3fin = pct(m2.pFin);
+  const s1ini = pct(m1.pIni);   const s1fin = pct(m1.pFin);
+  const s2ini = pct(m15.pIni);  const s2fin = pct(m15.pFin);
+  const s3ini = pct(m2.pIni);   const s3fin = pct(m2.pFin);
 
-  // Umbrales ID — cuadrado de los límites del tramo
-  const s1ini_id = pct(m1.pIni * m1.pIni);   const s1fin_id = pct(m1.pFin * m1.pFin);
-  const s2ini_id = pct(m15.pIni * m15.pIni); const s2fin_id = pct(m15.pFin * m15.pFin);
-  const s3ini_id = pct(m2.pIni * m2.pIni);   const s3fin_id = pct(m2.pFin * m2.pFin);
+  const s1ini_id = pct(m1.pIni * m1.pIni);    const s1fin_id = pct(m1.pFin * m1.pFin);
+  const s2ini_id = pct(m15.pIni * m15.pIni);  const s2fin_id = pct(m15.pFin * m15.pFin);
+  const s3ini_id = pct(m2.pIni * m2.pIni);    const s3fin_id = pct(m2.pFin * m2.pFin);
 
   const ramaID = (
     `IF(AND($B2>=${s3ini_id};$B2<=${s3fin_id});"STAKE 3";` +
     `IF(AND($B2>=${s2ini_id};$B2<=${s2fin_id});"STAKE 2";` +
     `IF(AND($B2>=${s1ini_id};$B2<=${s1fin_id});"STAKE 1";"NO APOSTAR")))`
   );
-
   const ramaNormal = (
     `IF(AND($B2>=${s3ini};$B2<=${s3fin});"STAKE 3";` +
     `IF(AND($B2>=${s2ini};$B2<=${s2fin});"STAKE 2";` +
     `IF(AND($B2>=${s1ini};$B2<=${s1fin});"STAKE 1";"NO APOSTAR")))`
   );
-
   return `=IF(LEFT($A2;2)="ID";${ramaID};${ramaNormal})`;
 }
 
 export async function GET(req: NextRequest) {
-  const existe = fs.existsSync(EXCEL_PATH);
-  if (!existe) return NextResponse.json({ existe: false });
-
-  // Leer umbrales de acierto desde query params (por defecto 60%)
-  const { searchParams } = new URL(req.url);
-  const minS1 = parseFloat(searchParams.get("minS1") ?? "60");
-  const minS2 = parseFloat(searchParams.get("minS2") ?? "60");
-  const minS3 = parseFloat(searchParams.get("minS3") ?? "60");
-
   try {
-    const registros = leerExcel(EXCEL_PATH);
+    const { searchParams } = new URL(req.url);
+    const minS1 = parseFloat(searchParams.get("minS1") ?? "60");
+    const minS2 = parseFloat(searchParams.get("minS2") ?? "60");
+    const minS3 = parseFloat(searchParams.get("minS3") ?? "60");
 
-    let estrategia  = buscarEstrategia(registros, 1.2, minS1, minS2, minS3);
-    let exito       = true;
-
-    if (!estrategia) {
-      estrategia = buscarEstrategia(registros, 1.2, 0, 0, 0);
-      exito      = false;
+    // Comprobar si existe en Blob
+    let blobInfo;
+    try {
+      blobInfo = await head(BLOB_KEY);
+    } catch {
+      return NextResponse.json({ existe: false });
     }
 
+    // Descargar y procesar
+    const res     = await fetch(blobInfo.url);
+    const buffer  = await res.arrayBuffer();
+    const registros = leerExcelBuffer(buffer);
+
+    let estrategia = buscarEstrategia(registros, 1.2, minS1, minS2, minS3);
+    let exito      = true;
+    if (!estrategia) { estrategia = buscarEstrategia(registros, 1.2, 0, 0, 0); exito = false; }
     if (estrategia) estrategia.exito = exito;
 
-    return NextResponse.json({
-      existe: true,
-      total: registros.length,
-      estrategia,
-      umbrales: { minS1, minS2, minS3 },
-    });
-  } catch {
+    return NextResponse.json({ existe: true, total: registros.length, estrategia, umbrales: { minS1, minS2, minS3 } });
+  } catch (e) {
+    console.error(e);
     return NextResponse.json({ error: "Error al procesar el Excel." }, { status: 500 });
   }
 }
@@ -161,11 +143,10 @@ export async function POST(req: NextRequest) {
     try { XLSX.read(buffer, { type: "buffer" }); }
     catch { return NextResponse.json({ error: "El archivo no es un Excel válido." }, { status: 400 }); }
 
-    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
-    fs.writeFileSync(EXCEL_PATH, buffer);
-
+    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true });
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (e) {
+    console.error(e);
     return NextResponse.json({ error: "Error al guardar el archivo." }, { status: 500 });
   }
 }
