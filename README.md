@@ -375,6 +375,25 @@ La lógica de sustitución de placeholders y gestión de diseños se mantiene en
 
 ---
 
+## 🌐 Despliegue
+
+La aplicación está desplegada en Vercel y accesible en:
+
+**https://tfm-tennis-suite.vercel.app**
+
+### Infraestructura
+| Servicio | Uso |
+|---|---|
+| **Vercel** | Hosting y despliegue continuo desde GitHub |
+| **Vercel Blob** | Almacenamiento persistente de archivos Excel |
+| **Google AI Studio** | API de Gemini 2.5 Flash para IA |
+
+### Variables de entorno necesarias
+| Variable | Descripción |
+|---|---|
+| `GEMINI_API_KEY` | API key de Google AI Studio |
+| `BLOB2_READ_WRITE_TOKEN` | Token de Vercel Blob para lectura/escritura de archivos |
+
 ## 👤 Autor
 
 **Borja García Zapardiel**
