@@ -6,16 +6,13 @@ const BLOB_KEY = "entrenamiento_modelo.xlsx";
 
 export async function GET() {
   let blobInfo;
-  try {
-    blobInfo = await head(BLOB_KEY);
-  } catch {
-    return NextResponse.json({ exists: false });
-  }
+  try { blobInfo = await head(BLOB_KEY); }
+  catch { return NextResponse.json({ exists: false }); }
 
   try {
-    // Descargar y procesar
-    const { download } = await import("@vercel/blob");
-    const res    = await download(blobInfo.url);
+    const res    = await fetch(blobInfo.url, {
+      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
+    });
     const buffer = await res.arrayBuffer();
     const wb     = XLSX.read(buffer, { type: "array" });
     const ws     = wb.Sheets[wb.SheetNames[0]];

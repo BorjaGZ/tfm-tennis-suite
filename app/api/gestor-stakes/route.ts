@@ -6,16 +6,14 @@ const BLOB_KEY = "gestor_stakes.xlsx";
 
 export async function GET() {
   let blobInfo;
-  try {
-    blobInfo = await head(BLOB_KEY);
-  } catch {
-    return NextResponse.json({ historial: [] });
-  }
+  try { blobInfo = await head(BLOB_KEY); }
+  catch { return NextResponse.json({ historial: [] }); }
 
   try {
-    const { download } = await import("@vercel/blob");
-    const res    = await download(blobInfo.url);
-    const buffer = await res.arrayBuffer();
+    const res    = await fetch(blobInfo.url, {
+      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
+    });
+    const buffer  = await res.arrayBuffer();
     const wb      = XLSX.read(buffer, { type: "array", cellDates: true });
     const ws      = wb.Sheets[wb.SheetNames[0]];
     const raw     = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
@@ -46,12 +44,12 @@ export async function POST(req: NextRequest) {
 
     let wb: XLSX.WorkBook;
 
-    // Intentar leer el existente
     try {
       const blobInfo = await head(BLOB_KEY);
-      const { download } = await import("@vercel/blob");
-      const res    = await download(blobInfo.url);
-      const buffer = await res.arrayBuffer();
+      const res      = await fetch(blobInfo.url, {
+        headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
+      });
+      const buffer   = await res.arrayBuffer();
       wb = XLSX.read(buffer, { type: "array", cellDates: true });
     } catch {
       wb = XLSX.utils.book_new();

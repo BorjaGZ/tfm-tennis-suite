@@ -78,7 +78,6 @@ function buscarEstrategia(
 function generarFormula(m1: Metricas, m15: Metricas, m2: Metricas, cuotaMin: number): string {
   const pct = (v: number) => `${Math.round(v * 100)}%`;
   const dec = (v: number) => v.toFixed(2).replace(".", ",");
-  const cond = `$D2>=${dec(cuotaMin)}`;
 
   const s1ini = pct(m1.pIni);   const s1fin = pct(m1.pFin);
   const s2ini = pct(m15.pIni);  const s2fin = pct(m15.pFin);
@@ -108,18 +107,14 @@ export async function GET(req: NextRequest) {
     const minS2 = parseFloat(searchParams.get("minS2") ?? "60");
     const minS3 = parseFloat(searchParams.get("minS3") ?? "60");
 
-    // Comprobar si existe en Blob
     let blobInfo;
-    try {
-      blobInfo = await head(BLOB_KEY);
-    } catch {
-      return NextResponse.json({ existe: false });
-    }
+    try { blobInfo = await head(BLOB_KEY); }
+    catch { return NextResponse.json({ existe: false }); }
 
-    // Descargar y procesar
-    const { download } = await import("@vercel/blob");
-    const res    = await download(blobInfo.url);
-    const buffer = await res.arrayBuffer();
+    const res    = await fetch(blobInfo.url, {
+      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
+    });
+    const buffer   = await res.arrayBuffer();
     const registros = leerExcelBuffer(buffer);
 
     let estrategia = buscarEstrategia(registros, 1.2, minS1, minS2, minS3);
