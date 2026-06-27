@@ -3,20 +3,19 @@ import * as XLSX from "xlsx";
 import { put, head } from "@vercel/blob";
 
 const BLOB_KEY = "gestor_stakes.xlsx";
+const TOKEN    = process.env.BLOB2_READ_WRITE_TOKEN;
 
 export async function GET() {
   let blobInfo;
-  try { blobInfo = await head(BLOB_KEY); }
+  try { blobInfo = await head(BLOB_KEY, { token: TOKEN }); }
   catch { return NextResponse.json({ historial: [] }); }
 
   try {
-    const res    = await fetch(blobInfo.url, {
-      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
-    });
-    const buffer  = await res.arrayBuffer();
-    const wb      = XLSX.read(buffer, { type: "array", cellDates: true });
-    const ws      = wb.Sheets[wb.SheetNames[0]];
-    const raw     = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
+    const res    = await fetch(blobInfo.url);
+    const buffer = await res.arrayBuffer();
+    const wb     = XLSX.read(buffer, { type: "array", cellDates: true });
+    const ws     = wb.Sheets[wb.SheetNames[0]];
+    const raw    = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
 
     const historial = raw.map((r) => ({
       fecha:          r["Fecha"] instanceof Date
@@ -45,10 +44,8 @@ export async function POST(req: NextRequest) {
     let wb: XLSX.WorkBook;
 
     try {
-      const blobInfo = await head(BLOB_KEY);
-      const res      = await fetch(blobInfo.url, {
-        headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
-      });
+      const blobInfo = await head(BLOB_KEY, { token: TOKEN });
+      const res      = await fetch(blobInfo.url);
       const buffer   = await res.arrayBuffer();
       wb = XLSX.read(buffer, { type: "array", cellDates: true });
     } catch {
@@ -65,7 +62,7 @@ export async function POST(req: NextRequest) {
     ]], { origin: -1 });
 
     const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
-    await put(BLOB_KEY, buffer, { access: "private", allowOverwrite: true });
+    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true, token: TOKEN });
 
     return NextResponse.json({ success: true });
   } catch {

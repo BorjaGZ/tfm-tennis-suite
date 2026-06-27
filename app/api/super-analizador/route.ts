@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import { put, head } from "@vercel/blob";
 
 const BLOB_KEY = "estadisticas.xlsx";
+const TOKEN    = process.env.BLOB2_READ_WRITE_TOKEN;
 
 interface Registro { probabilidad: number; cuota: number; resultado: string; }
 interface Metricas { total: number; aciertos: number; pctAcierto: number; beneficio: number; yield: number; pIni: number; pFin: number; }
@@ -108,13 +109,11 @@ export async function GET(req: NextRequest) {
     const minS3 = parseFloat(searchParams.get("minS3") ?? "60");
 
     let blobInfo;
-    try { blobInfo = await head(BLOB_KEY); }
+    try { blobInfo = await head(BLOB_KEY, { token: TOKEN }); }
     catch { return NextResponse.json({ existe: false }); }
 
-    const res    = await fetch(blobInfo.url, {
-      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
-    });
-    const buffer   = await res.arrayBuffer();
+    const res       = await fetch(blobInfo.url);
+    const buffer    = await res.arrayBuffer();
     const registros = leerExcelBuffer(buffer);
 
     let estrategia = buscarEstrategia(registros, 1.2, minS1, minS2, minS3);
@@ -139,7 +138,7 @@ export async function POST(req: NextRequest) {
     try { XLSX.read(buffer, { type: "buffer" }); }
     catch { return NextResponse.json({ error: "El archivo no es un Excel válido." }, { status: 400 }); }
 
-    await put(BLOB_KEY, buffer, { access: "private", allowOverwrite: true });
+    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true, token: TOKEN });
     return NextResponse.json({ success: true });
   } catch (e) {
     console.error(e);

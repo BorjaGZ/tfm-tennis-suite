@@ -3,16 +3,15 @@ import * as XLSX from "xlsx";
 import { put, head } from "@vercel/blob";
 
 const BLOB_KEY = "entrenamiento_modelo.xlsx";
+const TOKEN    = process.env.BLOB2_READ_WRITE_TOKEN;
 
 export async function GET() {
   let blobInfo;
-  try { blobInfo = await head(BLOB_KEY); }
+  try { blobInfo = await head(BLOB_KEY, { token: TOKEN }); }
   catch { return NextResponse.json({ exists: false }); }
 
   try {
-    const res    = await fetch(blobInfo.url, {
-      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }
-    });
+    const res    = await fetch(blobInfo.url);
     const buffer = await res.arrayBuffer();
     const wb     = XLSX.read(buffer, { type: "array" });
     const ws     = wb.Sheets[wb.SheetNames[0]];
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
     try { XLSX.read(buffer, { type: "buffer" }); }
     catch { return NextResponse.json({ error: "El archivo no es un Excel válido." }, { status: 400 }); }
 
-    await put(BLOB_KEY, buffer, { access: "private", allowOverwrite: true });
+    await put(BLOB_KEY, buffer, { access: "public", allowOverwrite: true, token: TOKEN });
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Error al guardar el archivo." }, { status: 500 });
