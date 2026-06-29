@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
 import { put, head } from "@vercel/blob";
 
+export const dynamic = "force-dynamic";
+
 const BLOB_KEY = "entrenamiento_modelo.xlsx";
 const TOKEN    = process.env.BLOB2_READ_WRITE_TOKEN;
 
@@ -11,7 +13,7 @@ export async function GET() {
   catch { return NextResponse.json({ exists: false }); }
 
   try {
-    const res    = await fetch(blobInfo.url);
+    const res    = await fetch(blobInfo.url, { cache: "no-store" });
     const buffer = await res.arrayBuffer();
     const wb     = XLSX.read(buffer, { type: "array" });
     const ws     = wb.Sheets[wb.SheetNames[0]];

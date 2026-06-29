@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
 import { put, head } from "@vercel/blob";
 
+export const dynamic = "force-dynamic";
+
 const BLOB_KEY = "gestor_stakes.xlsx";
 const TOKEN    = process.env.BLOB2_READ_WRITE_TOKEN;
 
@@ -11,7 +13,7 @@ export async function GET() {
   catch { return NextResponse.json({ historial: [] }); }
 
   try {
-    const res    = await fetch(blobInfo.url);
+    const res    = await fetch(blobInfo.url, { cache: "no-store" });
     const buffer = await res.arrayBuffer();
     const wb     = XLSX.read(buffer, { type: "array", cellDates: true });
     const ws     = wb.Sheets[wb.SheetNames[0]];
@@ -45,7 +47,7 @@ export async function POST(req: NextRequest) {
 
     try {
       const blobInfo = await head(BLOB_KEY, { token: TOKEN });
-      const res      = await fetch(blobInfo.url);
+      const res      = await fetch(blobInfo.url, { cache: "no-store" });
       const buffer   = await res.arrayBuffer();
       wb = XLSX.read(buffer, { type: "array", cellDates: true });
     } catch {
