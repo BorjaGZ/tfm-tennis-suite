@@ -45,7 +45,7 @@ function buscarEstrategia(
   minS1: number, minS2: number, minS3: number
 ): Estrategia | null {
   const probs = [...new Set(registros.map((r) => r.probabilidad))].sort((a, b) => a - b);
-  const MIN_APUESTAS = 5;
+  const MIN_APUESTAS = 10;
   const validos: Record<string, { m: Metricas; i: number; j: number }[]> = { s1: [], s2: [], s3: [] };
 
   for (let i = 0; i < probs.length; i++) {
