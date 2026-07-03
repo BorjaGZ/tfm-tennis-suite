@@ -12,8 +12,6 @@ const appsFilaSuperior = [
     href: "/super-analizador",
     title: "Super Analizador",
     desc: "Analiza tus estadísticas Excel y genera rangos óptimos de probabilidad por stake.",
-    badge: "Análisis Excel",
-    badgeClass: "ts-badge-green",
     accentClass: "ts-card-accent-green",
     icon: "📊",
   },
@@ -21,8 +19,6 @@ const appsFilaSuperior = [
     href: "/entrenamiento-modelo",
     title: "Entrenamiento Modelo",
     desc: "Selecciona los 9 partidos clave (3-3-3) para reentrenar tu modelo predictivo.",
-    badge: "Selección IA",
-    badgeClass: "ts-badge-green",
     accentClass: "ts-card-accent-green",
     icon: "🧠",
   },
@@ -33,8 +29,6 @@ const appsFilaInferior = [
     href: "/gestor-stakes",
     title: "Gestor de Stakes",
     desc: "Calcula tus stakes según el bankroll y controla los límites de recalculo.",
-    badge: "Calculadora",
-    badgeClass: "ts-badge-lime",
     accentClass: "ts-card-accent-lime",
     icon: "💰",
   },
@@ -42,8 +36,6 @@ const appsFilaInferior = [
     href: "/calculadora-value",
     title: "Calculadora de Value",
     desc: "Introduce la probabilidad y la cuota para saber si hay value y qué stake aplicar.",
-    badge: "Value Bet",
-    badgeClass: "ts-badge-lime",
     accentClass: "ts-card-accent-lime",
     icon: "📈",
   },
@@ -51,8 +43,6 @@ const appsFilaInferior = [
     href: "/generador-tarjetas",
     title: "Generador de Tarjetas",
     desc: "Crea tarjetas visuales de partidos para compartir en redes sociales.",
-    badge: "Diseño",
-    badgeClass: "ts-badge-lime",
     accentClass: "ts-card-accent-lime",
     icon: "🎨",
   },
@@ -60,8 +50,6 @@ const appsFilaInferior = [
     href: "/ultimas-noticias",
     title: "Últimas Noticias",
     desc: "Noticias del día sobre tenis obtenidas en tiempo real con Gemini AI.",
-    badge: "IA · Tiempo Real",
-    badgeClass: "ts-badge-lime",
     accentClass: "ts-card-accent-lime",
     icon: "📰",
   },
@@ -130,7 +118,6 @@ export default function Home() {
                 <p className="ts-text-muted-custom mb-3" style={{ fontSize: "13px", lineHeight: 1.6 }}>
                   {app.desc}
                 </p>
-                <span className={`ts-badge ${app.badgeClass}`}>{app.badge}</span>
               </Link>
             </div>
           ))}
