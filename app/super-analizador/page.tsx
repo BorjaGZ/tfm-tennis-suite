@@ -341,7 +341,7 @@ export default function SuperAnalizador() {
                       </code>
                       <button
                         onClick={() => copiar(analisis!.estrategia!.formula)}
-                        style={{ background: copiado ? "rgba(76,175,80,0.2)" : "rgba(223,255,79,0.1)", border: `1px solid ${copiado ? "rgba(76,175,80,0.4)" : "rgba(223,255,79,0.3)"}`, borderRadius: "6px", padding: "8px 14px", cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: "11px", color: copiado ? "var(--ts-accent-green)" : "var(--ts-accent-lime)", whiteSpace: "nowrap", flexShrink: 0 }}
+                        style={{ background: copiado ? "rgba(255,157,136,0.2)" : "rgba(227,83,54,0.1)", border: `1px solid ${copiado ? "rgba(255,157,136,0.4)" : "rgba(227,83,54,0.3)"}`, borderRadius: "6px", padding: "8px 14px", cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: "11px", color: copiado ? "var(--ts-accent-green)" : "var(--ts-accent-lime)", whiteSpace: "nowrap", flexShrink: 0 }}
                       >
                         {copiado ? "✓ COPIADO" : "COPIAR"}
                       </button>
