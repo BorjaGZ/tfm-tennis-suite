@@ -43,7 +43,7 @@ export default function UltimasNoticias() {
     switch (categoria.toUpperCase()) {
       case "ATP":        return { color: "var(--ts-accent-lime)",  border: "var(--ts-border-lime)" };
       case "WTA":        return { color: "#f472b6",                border: "rgba(244,114,182,0.3)" };
-      case "GRAND SLAM": return { color: "var(--ts-accent-green)", border: "var(--ts-border-green)" };
+      case "Challenger": return { color: "var(--ts-accent-green)", border: "var(--ts-border-green)" };
       default:           return { color: "#60a5fa",                border: "rgba(96,165,250,0.3)" };
     }
   };

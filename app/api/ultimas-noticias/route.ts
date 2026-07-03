@@ -20,7 +20,7 @@ export async function GET() {
     Para cada noticia incluye:
     - Titular en español
     - Resumen breve de 2-3 líneas
-    - Categoría (ATP / WTA / Grand Slam / Challenger Masculino / Challenger Femenino / Otro)
+    - Categoría (ATP / WTA / Challenger / Otro)
     
     Responde ÚNICAMENTE en formato JSON válido, sin texto adicional ni bloques de código, con esta estructura exacta:
     {
