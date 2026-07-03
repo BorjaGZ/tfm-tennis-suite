@@ -70,7 +70,7 @@ export default function Home() {
       {/* Hero */}
       <div className="border-bottom py-5 text-center" style={{ borderColor: "var(--ts-border-default) !important" }}>
         <div className="container-xl px-4">
-          <span className="ts-label">Trabajo Fin de Máster · IA</span>
+          <span className="ts-label" style={{ color: 'var(--ts-accent-purple)' }}>Trabajo Fin de Máster · IA</span>
           <h1 className="ts-page-title" style={{ fontSize: "56px" }}>
             <span className="ts-highlight-lime">Tennis </span><span className="ts-highlight-green">Suite</span>
           </h1>
