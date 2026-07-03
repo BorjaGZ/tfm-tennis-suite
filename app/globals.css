@@ -12,7 +12,8 @@
   --ts-accent-red:    #ff4444;
 
   --ts-text-primary:  #ffffff;
-  --ts-text-muted:    rgba(255,255,255,0.35);
+  /*--ts-text-muted:    rgba(255,255,255,0.35);*/
+  --ts-text-muted: #ffffff;
   --ts-text-faint:    rgba(255,255,255,0.15);
 
   --ts-border-default: rgba(255,255,255,0.08);
