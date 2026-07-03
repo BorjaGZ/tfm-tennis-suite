@@ -85,6 +85,10 @@ body {
   border-top: 2px solid var(--ts-accent-green);
 }
 
+.ts-card-accent-purple {
+  border-top: 2px solid var(--ts-accent-purple);
+}
+
 /* ============================================
    TYPOGRAPHY
    ============================================ */
