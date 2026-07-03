@@ -122,18 +122,16 @@ export default function SuperAnalizador() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Super Analizador</span>
           </div>
         </div>
       </nav>
 
       <div className="container-xl py-5 px-4">
 
-        <span className="ts-label ts-label-green">Análisis Excel</span>
         <h1 className="ts-page-title">
-          Super <span className="ts-highlight-green">Analizador</span>
+          <span className="ts-highlight-lime">Super </span><span className="ts-highlight-green">Analizador</span>
         </h1>
-        <p className="ts-text-muted-custom mb-5">
+        <p className="ts-text-muted-custom mb-4">
           Analiza tus estadísticas y genera rangos óptimos de probabilidad por stake. Cuota mínima: 1,20.
         </p>
 
@@ -203,8 +201,8 @@ export default function SuperAnalizador() {
                 </p>
                 <div className="row g-3 mb-4">
                   {[
-                    { label: "Stake 1", val: minS1, set: setMinS1, color: "var(--ts-accent-lime)" },
-                    { label: "Stake 2", val: minS2, set: setMinS2, color: "var(--ts-accent-green)" },
+                    { label: "Stake 1", val: minS1, set: setMinS1, color: "var(--ts-accent-orange)" },
+                    { label: "Stake 2", val: minS2, set: setMinS2, color: "var(--ts-accent-lime)" },
                     { label: "Stake 3", val: minS3, set: setMinS3, color: "var(--ts-accent-green)" },
                   ].map((s) => (
                     <div key={s.label} className="col-4">
@@ -301,8 +299,8 @@ export default function SuperAnalizador() {
                         </thead>
                         <tbody>
                           {[
-                            { label: "STAKE 1", m: analisis.estrategia.m1,  color: "var(--ts-accent-lime)",  obj: minS1 },
-                            { label: "STAKE 2", m: analisis.estrategia.m15, color: "var(--ts-accent-green)", obj: minS2 },
+                            { label: "STAKE 1", m: analisis.estrategia.m1,  color: "var(--ts-accent-orange)",  obj: minS1 },
+                            { label: "STAKE 2", m: analisis.estrategia.m15, color: "var(--ts-accent-lime)", obj: minS2 },
                             { label: "STAKE 3", m: analisis.estrategia.m2,  color: "var(--ts-accent-green)", obj: minS3 },
                           ].map(({ label, m, color, obj }) => (
                             <tr key={label} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
@@ -310,21 +308,21 @@ export default function SuperAnalizador() {
                               <td style={{ padding: "12px", fontFamily: "'Space Mono', monospace", fontSize: "12px", color: "#fff" }}>
                                 {pct(m.pIni)} – {pct(m.pFin)}
                               </td>
-                              <td style={{ padding: "12px", textAlign: "center", color: "var(--ts-text-muted)" }}>{m.total}</td>
+                              <td style={{ padding: "12px", textAlign: "center", color: "var(--ts-text-primary)" }}>{m.total}</td>
                               <td style={{ padding: "12px", textAlign: "center" }}>
-                                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "12px", fontWeight: 700, color: m.pctAcierto >= parseFloat(obj) ? "var(--ts-accent-green)" : "#ffaa00" }}>
+                                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "12px", fontWeight: 700, color: m.pctAcierto >= parseFloat(obj) ? "var(--ts-text-primary)" : "#E35336" }}>
                                   {m.pctAcierto.toFixed(1)}%
                                 </span>
                               </td>
                               <td style={{ padding: "12px", textAlign: "center" }}>
-                                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-text-muted)" }}>
+                                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-text-primary)" }}>
                                   ≥{obj}%
                                 </span>
                               </td>
-                              <td style={{ padding: "12px", textAlign: "center", fontFamily: "'Space Mono', monospace", fontSize: "12px", color: m.beneficio >= 0 ? "var(--ts-accent-lime)" : "#ff6666", fontWeight: 700 }}>
+                              <td style={{ padding: "12px", textAlign: "center", fontFamily: "'Space Mono', monospace", fontSize: "12px", color: m.beneficio >= 0 ? "var(--ts-text-primary)" : "#E35336", fontWeight: 700 }}>
                                 {m.beneficio >= 0 ? "+" : ""}{m.beneficio.toFixed(2)}u
                               </td>
-                              <td style={{ padding: "12px", textAlign: "center", fontFamily: "'Space Mono', monospace", fontSize: "12px", color: m.yield >= 0 ? "var(--ts-accent-lime)" : "#ff6666" }}>
+                              <td style={{ padding: "12px", textAlign: "center", fontFamily: "'Space Mono', monospace", fontSize: "12px", color: m.yield >= 0 ? "var(--ts-text-primary)" : "#E35336" }}>
                                 {m.yield >= 0 ? "+" : ""}{m.yield.toFixed(1)}%
                               </td>
                             </tr>
@@ -338,7 +336,7 @@ export default function SuperAnalizador() {
                   <div className="ts-card">
                     <span className="ts-label ts-label-muted mb-2 d-block">Fórmula para Excel</span>
                     <div style={{ background: "var(--ts-bg-primary)", border: "1px solid var(--ts-border-default)", borderRadius: "var(--ts-radius)", padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "16px" }}>
-                      <code style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-accent-lime)", wordBreak: "break-all", lineHeight: 1.6, flex: 1 }}>
+                      <code style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-text-primary)", wordBreak: "break-all", lineHeight: 1.6, flex: 1 }}>
                         {analisis.estrategia.formula}
                       </code>
                       <button

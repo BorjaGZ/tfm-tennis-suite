@@ -68,6 +68,7 @@ export default function AnalizadorPartido() {
   const probColor = (prob: number) => {
     if (prob >= 70) return "var(--ts-accent-green)";
     if (prob >= 60) return "var(--ts-accent-lime)";
+    if (prob >= 50) return "var(--ts-accent-red)";
     return "#ffaa00";
   };
 
@@ -144,9 +145,9 @@ export default function AnalizadorPartido() {
 
         {/* Cabecera */}
         <h1 className="ts-page-title">
-          <span className="ts-highlight-lime">Analizador de</span><span className="ts-highlight-green">Partido</span>
+          <span className="ts-highlight-lime">Analizador de </span><span className="ts-highlight-green">Partido</span>
         </h1>
-        <p className="ts-text-muted-custom mb-2">
+        <p className="ts-text-muted-custom mb-4">
           Sube las capturas de estadísticas de ambos jugadores y el modelo predice el ganador.
         </p>
 
