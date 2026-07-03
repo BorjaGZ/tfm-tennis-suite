@@ -144,7 +144,6 @@ export default function AnalizadorPartido() {
       <div className="container-xl py-5 px-4">
 
         {/* Cabecera */}
-        <span className="ts-label ts-label-green">IA · Gemini</span>
         <h1 className="ts-page-title">
           Analizador de <span className="ts-highlight-green">Partido</span>
         </h1>
