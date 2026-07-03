@@ -63,7 +63,6 @@ export default function Home() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <span className="ts-nav-brand">🎾 TENNIS SUITE</span>
-            <span className="ts-nav-section">TFM · Desarrollo con IA</span>
           </div>
         </div>
       </nav>
@@ -73,7 +72,7 @@ export default function Home() {
         <div className="container-xl px-4">
           <span className="ts-label">Trabajo Fin de Máster · IA</span>
           <h1 className="ts-page-title" style={{ fontSize: "56px" }}>
-            Tennis <span className="ts-highlight-lime">Suite</span>
+            <span className="ts-highlight-lime">Tennis </span><span className="ts-highlight-green">Suite</span>
           </h1>
           <p className="ts-text-muted-custom mt-2">
             Mini aplicaciones de tenis y apuestas deportivas
