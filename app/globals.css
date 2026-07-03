@@ -11,6 +11,7 @@
   --ts-accent-green:  #4CAF50;
   --ts-accent-red:    #E35336;
   --ts-accent-orange: #FFA500;
+  --ts-accent-red-light: #FF9D88;
 
   --ts-text-primary:  #ffffff;
   /*--ts-text-muted:    rgba(255,255,255,0.35);*/
@@ -167,13 +168,15 @@ body {
 .ts-btn-primary:hover { opacity: 0.65; }
 
 .ts-btn-secondary {
-  background: var(--ts-accent-red);
+  background: var(--ts-accent-red-light);
   color:var(--ts-bg-primary);
-  border: 1px solid var(--ts-border-default);
+  border: none;
   border-radius: var(--ts-radius);
   padding: 14px 24px;
   font-family: var(--font-mono);
   font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: border-color 0.2s;
 }
