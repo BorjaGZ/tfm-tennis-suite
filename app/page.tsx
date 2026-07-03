@@ -5,8 +5,6 @@ const appsFilaSuperior = [
     href: "/analizador-partido",
     title: "Analizador de Partido",
     desc: "Sube las estadísticas de ambos jugadores y el modelo predice el ganador.",
-    badge: "IA · Gemini",
-    badgeClass: "ts-badge-green",
     accentClass: "ts-card-accent-green",
     icon: "🤖",
   },
