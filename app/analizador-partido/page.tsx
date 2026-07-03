@@ -136,7 +136,6 @@ export default function AnalizadorPartido() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Analizador de Partido</span>
           </div>
         </div>
       </nav>
@@ -149,9 +148,6 @@ export default function AnalizadorPartido() {
         </h1>
         <p className="ts-text-muted-custom mb-2">
           Sube las capturas de estadísticas de ambos jugadores y el modelo predice el ganador.
-        </p>
-        <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-accent-green)", marginBottom: "40px" }}>
-          ✓ Modelo Tierra Batida activo · Gemini 2.5 Flash con Google Search
         </p>
 
         <div className="row g-4">
