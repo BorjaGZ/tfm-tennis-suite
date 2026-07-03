@@ -100,18 +100,16 @@ export default function CalculadoraValue() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Calculadora de Value</span>
           </div>
         </div>
       </nav>
 
       <div className="container-xl py-5 px-4">
 
-        <span className="ts-label">Value Bet</span>
         <h1 className="ts-page-title">
-          Calculadora de <span className="ts-highlight-lime">Value</span>
+          <span className="ts-highlight-lime">Calculadora de </span><span className="ts-highlight-green">Value</span>
         </h1>
-        <p className="ts-text-muted-custom mb-2">
+        <p className="ts-text-muted-custom mb-4">
           Introduce la probabilidad estimada y la cuota para saber si hay value y qué stake aplicar.
         </p>
 
@@ -123,7 +121,7 @@ export default function CalculadoraValue() {
             </span>
           ) : rangos ? (
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-accent-green)" }}>
-              ✓ Rangos cargados del Super Analizador — S1: {pct(rangos.m1.pIni)}–{pct(rangos.m1.pFin)} · S1.5: {pct(rangos.m15.pIni)}–{pct(rangos.m15.pFin)} · S2: {pct(rangos.m2.pIni)}–{pct(rangos.m2.pFin)}
+              ✓ Rangos cargados del Super Analizador — S1: {pct(rangos.m1.pIni)}–{pct(rangos.m1.pFin)} · S2: {pct(rangos.m15.pIni)}–{pct(rangos.m15.pFin)} · S3: {pct(rangos.m2.pIni)}–{pct(rangos.m2.pFin)}
             </span>
           ) : (
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "#ffaa00" }}>
@@ -180,9 +178,9 @@ export default function CalculadoraValue() {
                 </thead>
                 <tbody>
                   {rangos ? [
-                    { stake: "STAKE 2",    pIni: rangos.m2.pIni,  pFin: rangos.m2.pFin,  color: "var(--ts-accent-green)" },
-                    { stake: "STAKE 1.5",  pIni: rangos.m15.pIni, pFin: rangos.m15.pFin, color: "var(--ts-accent-green)" },
-                    { stake: "STAKE 1",    pIni: rangos.m1.pIni,  pFin: rangos.m1.pFin,  color: "var(--ts-accent-lime)" },
+                    { stake: "STAKE 3",    pIni: rangos.m2.pIni,  pFin: rangos.m2.pFin,  color: "var(--ts-accent-green)" },
+                    { stake: "STAKE 2",  pIni: rangos.m15.pIni, pFin: rangos.m15.pFin, color: "var(--ts-accent-lime)" },
+                    { stake: "STAKE 1",    pIni: rangos.m1.pIni,  pFin: rangos.m1.pFin,  color: "var(--ts-accent-orange)" },
                     { stake: "NO APOSTAR", pIni: 0, pFin: 0, color: "#ff6666" },
                   ].map((r) => (
                     <tr key={r.stake} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
