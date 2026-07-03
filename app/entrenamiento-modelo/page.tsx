@@ -150,7 +150,7 @@ export default function EntrenamientoModelo() {
               </td>
             )}
             <td style={{ padding: "12px", color: "#fff", fontWeight: 600 }}>{r.jugador}</td>
-            <td style={{ padding: "12px", textAlign: "center", color: "var(--ts-accent-lime)", fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
+            <td style={{ padding: "12px", textAlign: "center", color: "var(--ts-text-muted)", fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
               {r.probabilidad.toFixed(2)}
             </td>
             <td style={{ padding: "12px", textAlign: "center" }}>
@@ -168,7 +168,7 @@ export default function EntrenamientoModelo() {
     const { topSI, topNO, bottomSI } = analisis.grupos;
     const grupos = [
       { label: "↑ SI Mayor Prob", registros: topSI, color: "#4CAF50" },
-      { label: "↑ NO Mayor Prob", registros: topNO, color: "#ff6666" },
+      { label: "↑ NO Mayor Prob", registros: topNO, color: "#E35336" },
       { label: "↓ SI Menor Prob", registros: bottomSI, color: "#dfff4f" },
     ];
     return (
@@ -190,7 +190,7 @@ export default function EntrenamientoModelo() {
                   {label}
                 </td>
                 <td style={{ padding: "12px", color: "#fff", fontWeight: 600 }}>{r.jugador}</td>
-                <td style={{ padding: "12px", textAlign: "center", color: "var(--ts-accent-lime)", fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
+                <td style={{ padding: "12px", textAlign: "center", color: "var(--ts-text-muted)", fontFamily: "'Space Mono', monospace", fontWeight: 700 }}>
                   {r.probabilidad.toFixed(2)}
                 </td>
                 <td style={{ padding: "12px", textAlign: "center" }}>
@@ -212,7 +212,6 @@ export default function EntrenamientoModelo() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Entrenamiento Modelo</span>
           </div>
         </div>
       </nav>
@@ -220,11 +219,10 @@ export default function EntrenamientoModelo() {
       <div className="container-xl py-5 px-4">
 
         {/* Cabecera */}
-        <span className="ts-label ts-label-green">Selección IA</span>
         <h1 className="ts-page-title">
           Entrenamiento <span className="ts-highlight-green">Modelo</span>
         </h1>
-        <p className="ts-text-muted-custom mb-5">
+        <p className="ts-text-muted-custom mb-4">
           Selecciona los 9 partidos clave (3-3-3) para reentrenar tu modelo predictivo.
         </p>
 
