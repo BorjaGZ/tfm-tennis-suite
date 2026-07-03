@@ -55,7 +55,6 @@ export default function UltimasNoticias() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Últimas Noticias</span>
           </div>
         </div>
       </nav>
@@ -65,9 +64,8 @@ export default function UltimasNoticias() {
         {/* Cabecera */}
         <div className="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-2">
           <div>
-            <span className="ts-label">IA · Tiempo Real</span>
             <h1 className="ts-page-title">
-              Últimas <span className="ts-highlight-lime">Noticias</span>
+              <span className="ts-highlight-lime">Últimas </span><span className="ts-highlight-green">Noticias</span>
             </h1>
           </div>
           <button
@@ -80,7 +78,7 @@ export default function UltimasNoticias() {
           </button>
         </div>
 
-        <div className="d-flex align-items-center gap-3 mb-5">
+        <div className="d-flex align-items-center gap-3 mb-4">
           <p className="ts-text-muted-custom mb-0">
             Noticias del día obtenidas en tiempo real mediante Gemini AI con Google Search.
           </p>

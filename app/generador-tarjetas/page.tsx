@@ -92,7 +92,6 @@ export default function GeneradorTarjetas() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Generador de Tarjetas</span>
           </div>
         </div>
       </nav>
@@ -100,11 +99,10 @@ export default function GeneradorTarjetas() {
       <div className="container-xl py-5 px-4">
 
         {/* Cabecera */}
-        <span className="ts-label">Diseño</span>
         <h1 className="ts-page-title">
-          Generador de <span className="ts-highlight-lime">Tarjetas</span>
+          <span className="ts-highlight-lime">Generador de </span><span className="ts-highlight-green">Tarjetas</span>
         </h1>
-        <p className="ts-text-muted-custom mb-5">
+        <p className="ts-text-muted-custom mb-4">
           Rellena los campos, elige un diseño y genera tu tarjeta para redes sociales.
         </p>
 
