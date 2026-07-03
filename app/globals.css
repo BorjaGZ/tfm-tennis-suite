@@ -9,7 +9,7 @@
 
   --ts-accent-lime:   #dfff4f;
   --ts-accent-green:  #4CAF50;
-  --ts-accent-red:    #ff4444;
+  --ts-accent-red:    #E35336;
 
   --ts-text-primary:  #ffffff;
   /*--ts-text-muted:    rgba(255,255,255,0.35);*/
@@ -149,7 +149,7 @@ body {
    BUTTONS
    ============================================ */
 .ts-btn-primary {
-  background: var(--ts-accent-lime);
+  background: var(--ts-accent-red);
   color: var(--ts-bg-primary);
   border: none;
   border-radius: var(--ts-radius);
