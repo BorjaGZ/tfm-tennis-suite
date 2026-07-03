@@ -194,7 +194,7 @@ export default function GeneradorTarjetas() {
                 </span>
               </div>
             ) : (
-              <div className="ts-card ts-card-accent-lime">
+              <div className="ts-card ts-card-accent-purple">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <span className="ts-label mb-0" style={{ color: "var(--ts-accent-green)" }}>
                     ✓ Tarjeta generada

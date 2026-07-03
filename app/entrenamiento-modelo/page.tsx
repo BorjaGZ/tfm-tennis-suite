@@ -256,7 +256,7 @@ export default function EntrenamientoModelo() {
         {estado === "sin-excel" && (
           <div className="row justify-content-center">
             <div className="col-12 col-md-6">
-              <div className="ts-card ts-card-accent-green text-center">
+              <div className="ts-card ts-card-accent-purple text-center">
                 <span style={{ fontSize: "40px", display: "block", marginBottom: "20px" }}>📂</span>
                 <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "8px" }}>
                   No hay Excel en el servidor
@@ -288,7 +288,7 @@ export default function EntrenamientoModelo() {
         {estado === "con-excel" && (
           <div className="row justify-content-center">
             <div className="col-12 col-md-6">
-              <div className="ts-card ts-card-accent-green text-center">
+              <div className="ts-card ts-card-accent-purple text-center">
                 <span style={{ fontSize: "40px", display: "block", marginBottom: "20px" }}>✅</span>
                 <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "8px" }}>
                   Excel disponible en el servidor
@@ -333,7 +333,7 @@ export default function EntrenamientoModelo() {
             </div>
 
             {/* Selección 3-3-3 */}
-            <div className="ts-card ts-card-accent-green mb-4">
+            <div className="ts-card ts-card-accent-purple mb-4">
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <span className="ts-label ts-label-green mb-0">Selección 3-3-3 para reentrenamiento</span>
                 <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "12px", color: "var(--ts-accent-green)", border: "1px solid var(--ts-border-green)", borderRadius: "4px", padding: "3px 10px" }}>

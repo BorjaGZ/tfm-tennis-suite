@@ -165,7 +165,7 @@ export default function SuperAnalizador() {
         {estado === "sin-excel" && (
           <div className="row justify-content-center">
             <div className="col-12 col-md-6">
-              <div className="ts-card ts-card-accent-green text-center">
+              <div className="ts-card ts-card-accent-purple text-center">
                 <span style={{ fontSize: "40px", display: "block", marginBottom: "20px" }}>📂</span>
                 <h2 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "8px" }}>
                   No hay Excel en el servidor
@@ -284,7 +284,7 @@ export default function SuperAnalizador() {
               {analisis?.estrategia && (
                 <div>
                   {/* Tabla de stakes */}
-                  <div className="ts-card ts-card-accent-green mb-4">
+                  <div className="ts-card ts-card-accent-purple mb-4">
                     <span className="ts-label ts-label-green mb-3 d-block">Rangos óptimos por stake</span>
                     <div style={{ overflowX: "auto" }}>
                       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>

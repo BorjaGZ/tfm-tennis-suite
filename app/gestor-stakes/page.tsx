@@ -282,7 +282,7 @@ export default function GestorStakes() {
             {resultado && (
               <div>
                 {/* Stakes */}
-                <div className="ts-card ts-card-accent-lime mb-4">
+                <div className="ts-card ts-card-accent-purple mb-4">
                   <span className="ts-label mb-3 d-block">Stakes calculados</span>
                   <div className="row g-3 mb-4">
                     {[

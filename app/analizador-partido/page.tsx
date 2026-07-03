@@ -247,7 +247,7 @@ export default function AnalizadorPartido() {
             {estado === "resultado" && resultado && (
               <div>
                 {/* Ganador */}
-                <div className="ts-card ts-card-accent-green mb-4" style={{ textAlign: "center", padding: "52px 32px" }}>
+                <div className="ts-card ts-card-accent-purple mb-4" style={{ textAlign: "center", padding: "52px 32px" }}>
                   <span className="ts-label ts-label-green mb-3 d-block">Predicción del modelo</span>
                   <p style={{ fontSize: "52px", margin: "0 0 16px 0" }}>🏆</p>
                   <h2 style={{ fontSize: "40px", fontWeight: 900, letterSpacing: "-1px", color: "#fff", margin: "0 0 8px 0", lineHeight: 1.1 }}>
