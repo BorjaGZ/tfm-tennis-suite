@@ -50,13 +50,14 @@ body {
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 700;
-  color: var(--ts-accent-lime);
+  color: var(--ts-accent-purple);
   letter-spacing: 2px;
   text-decoration: none;
 }
 
 .ts-nav-brand:hover {
   color: var(--ts-accent-lime);
+  cursor: pointer;
 }
 
 .ts-nav-section {
