@@ -220,7 +220,7 @@ export default function EntrenamientoModelo() {
 
         {/* Cabecera */}
         <h1 className="ts-page-title">
-          Entrenamiento <span className="ts-highlight-green">Modelo</span>
+          <span className="ts-highlight-lime">Entrenamiento </span><span className="ts-highlight-green">Modelo</span>
         </h1>
         <p className="ts-text-muted-custom mb-4">
           Selecciona los 9 partidos clave (3-3-3) para reentrenar tu modelo predictivo.

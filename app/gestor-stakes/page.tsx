@@ -139,18 +139,16 @@ export default function GestorStakes() {
         <div className="container-fluid px-4">
           <div className="d-flex justify-content-between align-items-center">
             <a href="/" className="ts-nav-brand">🎾 TENNIS SUITE</a>
-            <span className="ts-nav-section">Gestor de Stakes</span>
           </div>
         </div>
       </nav>
 
       <div className="container-xl py-5 px-4">
 
-        <span className="ts-label">Calculadora</span>
         <h1 className="ts-page-title">
-          Gestor de <span className="ts-highlight-lime">Stakes</span>
+          <span className="ts-highlight-lime">Gestor de </span><span className="ts-highlight-green">Stakes</span>
         </h1>
-        <p className="ts-text-muted-custom mb-5">
+        <p className="ts-text-muted-custom mb-4">
           Calcula tus stakes según el 1%, 2% y 3% de tu bankroll y controla los límites de recalculo.
         </p>
 
@@ -288,8 +286,8 @@ export default function GestorStakes() {
                   <span className="ts-label mb-3 d-block">Stakes calculados</span>
                   <div className="row g-3 mb-4">
                     {[
-                      { label: "Stake 1", pct: "1%", value: resultado.stake1,  color: "var(--ts-accent-lime)" },
-                      { label: "Stake 2", pct: "2%", value: resultado.stake2,  color: "var(--ts-accent-green)" },
+                      { label: "Stake 1", pct: "1%", value: resultado.stake1,  color: "var(--ts-accent-orange)" },
+                      { label: "Stake 2", pct: "2%", value: resultado.stake2,  color: "var(--ts-accent-lime)" },
                       { label: "Stake 3", pct: "3%", value: resultado.stake3,  color: "var(--ts-accent-green)" },
                     ].map((s) => (
                       <div key={s.label} className="col-4">
@@ -309,7 +307,7 @@ export default function GestorStakes() {
                   <div className="ts-totals-box">
                     <div className="ts-total-row">
                       <span className="ts-total-label">Bank base</span>
-                      <span className="ts-total-value" style={{ color: "var(--ts-accent-lime)" }}>
+                      <span className="ts-total-value" style={{ color: "var(--ts-accent-red-light)" }}>
                         €{bankBaseNum.toFixed(2)}
                       </span>
                     </div>
