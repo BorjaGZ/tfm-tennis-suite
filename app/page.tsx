@@ -108,8 +108,7 @@ export default function Home() {
                 </h2>
                 <p className="ts-text-muted-custom mb-3" style={{ fontSize: "13px", lineHeight: 1.6 }}>
                   {app.desc}
-                </p>
-                <span className={`ts-badge ${app.badgeClass}`}>{app.badge}</span>
+                </p>                
               </Link>
             </div>
           ))}
