@@ -163,7 +163,7 @@ body {
   transition: opacity 0.2s;
 }
 
-.ts-btn-primary:hover { opacity: 0.88; }
+.ts-btn-primary:hover { opacity: 0.65; }
 
 .ts-btn-secondary {
   background: transparent;
