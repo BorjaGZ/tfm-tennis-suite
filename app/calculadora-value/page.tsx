@@ -219,7 +219,7 @@ export default function CalculadoraValue() {
             ) : (
               <div>
                 {/* Veredicto */}
-                <div className="ts-card mb-4" style={{ borderTop: `2px solid ${resultado.tieneValue ? "var(--ts-accent-lime)" : "#ff6666"}`, textAlign: "center", padding: "48px 32px" }}>
+                <div className="ts-card mb-4" style={{ borderTop: `2px solid ${resultado.tieneValue ? "var(--ts-accent-purple)" : "#A55EFF"}`, textAlign: "center", padding: "48px 32px" }}>
                   <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "12px", color: "var(--ts-text-muted)", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "20px" }}>Veredicto</p>
                   <p style={{ fontSize: "64px", margin: "0 0 16px 0" }}>{resultado.tieneValue ? "✅" : "❌"}</p>
                   <h2 style={{ fontSize: "32px", fontWeight: 900, letterSpacing: "-1px", color: resultado.tieneValue ? "var(--ts-accent-lime)" : "#ff6666", margin: "0 0 12px 0" }}>
