@@ -144,7 +144,7 @@ export default function AnalizadorPartido() {
 
         {/* Cabecera */}
         <h1 className="ts-page-title">
-          <span className="ts-highlight-yellow"></span>Analizador de <span className="ts-highlight-green">Partido</span>
+          <span className="ts-highlight-lime"></span>Analizador de <span className="ts-highlight-green">Partido</span>
         </h1>
         <p className="ts-text-muted-custom mb-2">
           Sube las capturas de estadísticas de ambos jugadores y el modelo predice el ganador.
