@@ -75,6 +75,12 @@ export default function SuperAnalizador() {
   };
 
   const subirExcel = async (file: File) => {
+    const extensionesValidas = [".xlsx", ".xls"];
+    const extension = file.name.toLowerCase().slice(file.name.lastIndexOf("."));
+    if (!extensionesValidas.includes(extension)) {
+      setError("Solo se permiten archivos Excel (.xlsx o .xls).");
+      return;
+    }
     setSubiendo(true);
     setError("");
     try {
