@@ -24,6 +24,14 @@ export default function AnalizadorPartido() {
   const onFile = (e: React.ChangeEvent<HTMLInputElement>, num: 1 | 2) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Solo se permiten archivos de imagen (JPG, PNG, WEBP...).");
+      e.target.value = "";
+      return;
+    }
+
+    setError("");
     const url = URL.createObjectURL(file);
     if (num === 1) { setImagen1(file); setPreview1(url); }
     else           { setImagen2(file); setPreview2(url); }
