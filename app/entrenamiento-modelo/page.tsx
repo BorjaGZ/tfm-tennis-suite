@@ -68,6 +68,11 @@ export default function EntrenamientoModelo() {
   };
 
   const subirExcel = async (file: File) => {
+    const extension = file.name.toLowerCase().slice(file.name.lastIndexOf("."));
+    if (extension !== ".xlsx" && extension !== ".xls") {
+      setError("Solo se permiten archivos Excel (.xlsx o .xls).");
+      return;
+    }
     setSubiendo(true);
     setError("");
     try {
@@ -313,6 +318,7 @@ export default function EntrenamientoModelo() {
         {/* Estado: resultado */}
         {estado === "resultado" && analisis && (
           <div>
+            {error && <div className="ts-alert-error mb-4">{error}</div>}
             {/* Barra de acciones */}
             <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
               <div>
