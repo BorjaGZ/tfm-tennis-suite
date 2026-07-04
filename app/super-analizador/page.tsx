@@ -197,6 +197,8 @@ export default function SuperAnalizador() {
             {/* Columna izquierda */}
             <div className="col-12 col-lg-4">
 
+              {error && <div className="ts-alert-error mb-4">{error}</div>}
+
               {/* Umbrales de acierto */}
               <div className="ts-card mb-4">
                 <span className="ts-label ts-label-muted mb-3 d-block">% Acierto mínimo por stake</span>
