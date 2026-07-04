@@ -75,9 +75,14 @@ export default function SuperAnalizador() {
   };
 
   const subirExcel = async (file: File) => {
+    const tiposValidos = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+      "application/vnd.ms-excel", // .xls
+    ];
     const extensionesValidas = [".xlsx", ".xls"];
     const extension = file.name.toLowerCase().slice(file.name.lastIndexOf("."));
-    if (!extensionesValidas.includes(extension)) {
+
+    if (!tiposValidos.includes(file.type) && !extensionesValidas.includes(extension)) {
       setError("Solo se permiten archivos Excel (.xlsx o .xls).");
       return;
     }
