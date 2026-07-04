@@ -91,7 +91,6 @@ export default function SuperAnalizador() {
       await ejecutar();
     } catch (e: any) {
       setError(e.message ?? "Error al subir el archivo.");
-      setEstado("sin-excel");
     } finally {
       setSubiendo(false);
     }
