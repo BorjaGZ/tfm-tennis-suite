@@ -35,7 +35,7 @@ Calculadora de stakes basada en porcentaje del bankroll con control de límites 
 - **EXPORTAR** — guarda el registro actual en `data/gestor_stakes.xlsx` con fecha, bank y stakes
 - **VER HISTORIAL** — muestra la evolución completa del bankroll desde el Excel
 
-### 2. 📊 Super Analizador
+### 2. 📊 Generador de Rangos
 Analiza un archivo Excel de estadísticas históricas y genera los rangos óptimos de probabilidad por stake.
 
 - Sube o reemplaza tu archivo `estadisticas.xlsx` desde la propia web
@@ -67,7 +67,7 @@ Determina si una apuesta tiene value y qué stake aplicar.
 
 - Introduce la probabilidad estimada y la cuota de la casa
 - Calcula el valor esperado, el edge y la cuota mínima necesaria
-- Se integra automáticamente con el Super Analizador para usar los rangos reales del modelo
+- Se integra automáticamente con el Generador de Rangos para usar los rangos reales del modelo
 - Recomienda el stake óptimo según los rangos calculados
 
 ### 6. 📰 Últimas Noticias
@@ -230,7 +230,7 @@ npm start
 
 ### estadisticas.xlsx
 
-Utilizado por el **Super Analizador** y la **Calculadora de Value**.
+Utilizado por el **Generador de Rangos** y la **Calculadora de Value**.
 
 | Columna | Tipo | Descripción |
 |---|---|---|

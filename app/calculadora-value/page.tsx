@@ -34,8 +34,8 @@ export default function CalculadoraValue() {
 
   const determinarStake = (probDecimal: number): { stake: Resultado["stake"]; motivo: string } => {
     if (!rangos) {
-      // Fallback si no hay rangos del Super Analizador
-      if (probDecimal >= 0.70) return { stake: "STAKE 2",   motivo: "Probabilidad alta. Rangos por defecto (sin datos del Super Analizador)." };
+      // Fallback si no hay rangos del Generador de Rangos
+      if (probDecimal >= 0.70) return { stake: "STAKE 2",   motivo: "Probabilidad alta. Rangos por defecto (sin datos del Generador de Rangos)." };
       if (probDecimal >= 0.62) return { stake: "STAKE 1.5", motivo: "Probabilidad media-alta. Rangos por defecto." };
       if (probDecimal >= 0.54) return { stake: "STAKE 1",   motivo: "Probabilidad media. Rangos por defecto." };
       return { stake: "NO APOSTAR", motivo: "Probabilidad insuficiente. Rangos por defecto." };
@@ -121,11 +121,11 @@ export default function CalculadoraValue() {
             </span>
           ) : rangos ? (
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "var(--ts-accent-green)" }}>
-              ✓ Rangos cargados del Super Analizador — S1: {pct(rangos.m1.pIni)}–{pct(rangos.m1.pFin)} · S2: {pct(rangos.m15.pIni)}–{pct(rangos.m15.pFin)} · S3: {pct(rangos.m2.pIni)}–{pct(rangos.m2.pFin)}
+              ✓ Rangos cargados del Generador de Rangos — S1: {pct(rangos.m1.pIni)}–{pct(rangos.m1.pFin)} · S2: {pct(rangos.m15.pIni)}–{pct(rangos.m15.pFin)} · S3: {pct(rangos.m2.pIni)}–{pct(rangos.m2.pFin)}
             </span>
           ) : (
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "#ffaa00" }}>
-              ⚠ Sin datos del Super Analizador — usando rangos por defecto. <a href="/generador-rangos" style={{ color: "#ffaa00" }}>Ejecuta el análisis primero.</a>
+              ⚠ Sin datos del Generador de Rangos — usando rangos por defecto. <a href="/generador-rangos" style={{ color: "#ffaa00" }}>Ejecuta el análisis primero.</a>
             </span>
           )}
         </div>
@@ -166,7 +166,7 @@ export default function CalculadoraValue() {
             {/* Tabla de rangos del modelo */}
             <div className="ts-card">
               <span className="ts-label ts-label-muted mb-3 d-block">
-                Rangos del modelo {rangos ? "(Super Analizador)" : "(por defecto)"}
+                Rangos del modelo {rangos ? "(Generador de Rangos)" : "(por defecto)"}
               </span>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
                 <thead>
