@@ -23,7 +23,7 @@ export default function CalculadoraValue() {
   const [cargandoRangos, setCargandoRangos] = useState(true);
 
   useEffect(() => {
-    fetch("/api/super-analizador")
+    fetch("/api/generador-rangos")
       .then((r) => r.json())
       .then((data) => {
         if (data.estrategia) setRangos(data.estrategia);
@@ -125,7 +125,7 @@ export default function CalculadoraValue() {
             </span>
           ) : (
             <span style={{ fontFamily: "'Space Mono', monospace", fontSize: "11px", color: "#ffaa00" }}>
-              ⚠ Sin datos del Super Analizador — usando rangos por defecto. <a href="/super-analizador" style={{ color: "#ffaa00" }}>Ejecuta el análisis primero.</a>
+              ⚠ Sin datos del Super Analizador — usando rangos por defecto. <a href="/generador-rangos" style={{ color: "#ffaa00" }}>Ejecuta el análisis primero.</a>
             </span>
           )}
         </div>

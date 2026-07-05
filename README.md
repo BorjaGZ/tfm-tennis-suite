@@ -113,7 +113,7 @@ tfm-tennis-suite/
 │   ├── globals.css                     # Design system (variables CSS, componentes)
 │   ├── gestor-stakes/
 │   │   └── page.tsx                    # Calculadora de distribución de stakes
-│   ├── super-analizador/
+│   ├── generador-rangos/
 │   │   └── page.tsx                    # Analizador de estadísticas Excel
 │   ├── entrenamiento-modelo/
 │   │   └── page.tsx                    # Selección 3-3-3 para reentrenamiento
@@ -122,7 +122,7 @@ tfm-tennis-suite/
 │   ├── calculadora-value/
 │   │   └── page.tsx                    # Calculadora de value bet
 │   └── api/
-│       ├── super-analizador/
+│       ├── generador-rangos/
 │       │   └── route.ts                # API: análisis Excel y subida de archivo
 │       └── entrenamiento-modelo/
 │           └── route.ts                # API: selección 3-3-3 y subida de archivo
@@ -253,7 +253,7 @@ Utilizado por **Entrenamiento Modelo**.
 
 ## 🔌 API Routes
 
-### `GET /api/super-analizador`
+### `GET /api/generador-rangos`
 Comprueba si existe el Excel en el servidor y ejecuta el análisis.
 
 **Respuesta:**
@@ -272,7 +272,7 @@ Comprueba si existe el Excel en el servidor y ejecuta el análisis.
 }
 ```
 
-### `POST /api/super-analizador`
+### `POST /api/generador-rangos`
 Sube o reemplaza el archivo `estadisticas.xlsx`.
 
 **Body:** `FormData` con campo `file` (archivo xlsx).

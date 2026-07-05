@@ -47,7 +47,7 @@ export default function SuperAnalizador() {
   const comprobar = async () => {
     setEstado("cargando");
     try {
-      const res  = await fetch("/api/super-analizador");
+      const res  = await fetch("/api/generador-rangos");
       const data = await res.json();
       setAnalisis(data);
       if (data.error)   { setError(data.error); setEstado("error"); return; }
@@ -63,7 +63,7 @@ export default function SuperAnalizador() {
     setEstado("analizando");
     try {
       const params = new URLSearchParams({ minS1, minS2, minS3 });
-      const res    = await fetch(`/api/super-analizador?${params}`);
+      const res    = await fetch(`/api/generador-rangos?${params}`);
       const data   = await res.json();
       if (data.error) throw new Error(data.error);
       setAnalisis(data);
@@ -85,7 +85,7 @@ export default function SuperAnalizador() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res  = await fetch("/api/super-analizador", { method: "POST", body: formData });
+      const res  = await fetch("/api/generador-rangos", { method: "POST", body: formData });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
       await ejecutar();

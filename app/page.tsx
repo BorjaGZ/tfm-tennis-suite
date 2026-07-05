@@ -9,15 +9,15 @@ const appsFilaSuperior = [
     icon: "🤖",
   },
   {
-    href: "/super-analizador",
-    title: "Super Analizador",
+    href: "/generador-rangos",
+    title: "Generador de Rangos",
     desc: "Analiza tus estadísticas Excel y genera rangos óptimos de probabilidad por stake.",
     accentClass: "ts-card-accent-purple",
     icon: "📊",
   },
   {
     href: "/entrenamiento-modelo",
-    title: "Entrenamiento Modelo",
+    title: "Entrenamiento del Modelo",
     desc: "Selecciona los 9 partidos clave (3-3-3) para reentrenar tu modelo predictivo.",
     accentClass: "ts-card-accent-purple",
     icon: "🧠",
