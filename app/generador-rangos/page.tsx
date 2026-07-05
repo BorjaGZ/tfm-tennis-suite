@@ -133,7 +133,7 @@ export default function SuperAnalizador() {
       <div className="container-xl py-5 px-4">
 
         <h1 className="ts-page-title">
-          <span className="ts-highlight-lime">Super </span><span className="ts-highlight-green">Analizador</span>
+          <span className="ts-highlight-lime">Generador de </span><span className="ts-highlight-green">Rangos</span>
         </h1>
         <p className="ts-text-muted-custom mb-4">
           Analiza tus estadísticas y genera rangos óptimos de probabilidad por stake. Cuota mínima: 1,20.
