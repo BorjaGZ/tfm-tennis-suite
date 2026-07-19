@@ -394,6 +394,21 @@ La aplicación está desplegada en Vercel y accesible en:
 | `GEMINI_API_KEY` | API key de Google AI Studio |
 | `BLOB2_READ_WRITE_TOKEN` | Token de Vercel Blob para lectura/escritura de archivos |
 
+## 📊 Presentación
+
+[Ver slides del proyecto](./docs/TFM_Tennis_Suite.pdf)
+
+🎥 **Vídeo explicativo:** [URL de YouTube]
+
+## 🧪 Archivos de prueba
+
+Para probar las funcionalidades que requieren archivos, se incluyen ejemplos en la carpeta `docs/archivos-prueba/`:
+
+- Analizador de Partido IMAGEN 1 (estadistica_global.png) e IMAGEN 2 (estadistica_tierra.png)
+- Generador de Rangos: estadisticas.xlsx
+- Entrenamiento Modelo: entrenamiento_modelo.xlsx
+
+
 ## 👤 Autor
 
 **Borja García Zapardiel**
