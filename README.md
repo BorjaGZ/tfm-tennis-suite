@@ -398,6 +398,8 @@ La aplicación está desplegada en Vercel y accesible en:
 
 [Ver slides del proyecto](./docs/TFM_Tennis_Suite.pdf)
 
+https://github.com/BorjaGZ/tfm-tennis-suite/blob/main/docs/TFM_Tennis_Suite.pdf
+
 🎥 **Vídeo explicativo:** [URL de YouTube]
 
 ## 🧪 Archivos de prueba
@@ -405,8 +407,17 @@ La aplicación está desplegada en Vercel y accesible en:
 Para probar las funcionalidades que requieren archivos, se incluyen ejemplos en la carpeta `docs/archivos-prueba/`:
 
 - Analizador de Partido IMAGEN 1 (estadistica_global.png) e IMAGEN 2 (estadistica_tierra.png)
+  
+  https://github.com/BorjaGZ/tfm-tennis-suite/blob/main/docs/archivos-prueba/estadistica_global.png
+  https://github.com/BorjaGZ/tfm-tennis-suite/blob/main/docs/archivos-prueba/estadistica_tierra.png
+
 - Generador de Rangos: estadisticas.xlsx
+
+  https://github.com/BorjaGZ/tfm-tennis-suite/blob/main/docs/archivos-prueba/estadisticas.xlsx
+
 - Entrenamiento Modelo: entrenamiento_modelo.xlsx
+
+  https://github.com/BorjaGZ/tfm-tennis-suite/blob/main/docs/archivos-prueba/entrenamiento_modelo.xlsx
 
 
 ## 👤 Autor
