@@ -243,6 +243,46 @@ export const DISENOS: Diseno[] = [
     acento: "#14dcff",
     bgColor: "#2a0a4d",
   },
+    {
+    id: "diseno29",
+    nombre: "Clay Splash",
+    descripcion: "Tonos tierra y melocotón con splash de pintura sobre crema.",
+    templatePath: "/tarjetas/diseno29/template.html",
+    acento: "#8b5028",
+    bgColor: "#ead9c8",
+  },
+  {
+    id: "diseno30",
+    nombre: "Velocity Smoke",
+    descripcion: "Humo púrpura y rosa vibrante con acentos dorados.",
+    templatePath: "/tarjetas/diseno30/template.html",
+    acento: "#ff5fd6",
+    bgColor: "#6a1e7a",
+  },
+  {
+    id: "diseno31",
+    nombre: "Ice Fire",
+    descripcion: "Contraste diagonal cian y rojo intenso sobre negro.",
+    templatePath: "/tarjetas/diseno31/template.html",
+    acento: "#00dcdc",
+    bgColor: "#1a0a0a",
+  },
+  {
+    id: "diseno32",
+    nombre: "Onyx Splash",
+    descripcion: "Negro profundo con salpicaduras de color arcoíris sutiles.",
+    templatePath: "/tarjetas/diseno32/template.html",
+    acento: "#ff9640",
+    bgColor: "#0a0a0a",
+  },
+  {
+    id: "diseno33",
+    nombre: "Triple Flame",
+    descripcion: "Degradado cálido a frío, de rojo fuego a azul profundo.",
+    templatePath: "/tarjetas/diseno33/template.html",
+    acento: "#ffe066",
+    bgColor: "#d4680d",
+  },
 ];
 
 export async function cargarTemplate(templatePath: string): Promise<string> {
