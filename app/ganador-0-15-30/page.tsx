@@ -19,13 +19,71 @@ interface DatosJugador {
   ganado2do: string;
 }
 
+// Componente fuera del principal — evita perder el foco al escribir
+function CampoJugador({
+  titulo, datos, onChange,
+}: {
+  titulo: string;
+  datos: DatosJugador;
+  onChange: (d: DatosJugador) => void;
+}) {
+  return (
+    <div className="ts-card mb-4">
+      <span className="ts-label ts-label-muted mb-3 d-block">{titulo}</span>
+
+      <div className="mb-3">
+        <label className="ts-input-label">Nombre</label>
+        <input
+          type="text"
+          className="ts-input"
+          placeholder={titulo}
+          value={datos.nombre}
+          onChange={(e) => onChange({ ...datos, nombre: e.target.value })}
+        />
+      </div>
+
+      <div className="row g-3">
+        <div className="col-4">
+          <label className="ts-input-label">1er servicio %</label>
+          <input
+            type="text"
+            className="ts-input"
+            placeholder="78,1"
+            value={datos.primerServicio}
+            onChange={(e) => onChange({ ...datos, primerServicio: e.target.value })}
+          />
+        </div>
+        <div className="col-4">
+          <label className="ts-input-label">Ganado 1er %</label>
+          <input
+            type="text"
+            className="ts-input"
+            placeholder="59,4"
+            value={datos.ganado1er}
+            onChange={(e) => onChange({ ...datos, ganado1er: e.target.value })}
+          />
+        </div>
+        <div className="col-4">
+          <label className="ts-input-label">Ganado 2do %</label>
+          <input
+            type="text"
+            className="ts-input"
+            placeholder="44,8"
+            value={datos.ganado2do}
+            onChange={(e) => onChange({ ...datos, ganado2do: e.target.value })}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function GanadorCero1530() {
   const [j1, setJ1] = useState<DatosJugador>({ nombre: "", primerServicio: "", ganado1er: "", ganado2do: "" });
   const [j2, setJ2] = useState<DatosJugador>({ nombre: "", primerServicio: "", ganado1er: "", ganado2do: "" });
   const [resultado, setResultado] = useState<Resultado | null>(null);
   const [error, setError] = useState("");
 
-  // Trunca a 2 decimales evitando errores de coma flotante
   const truncar2 = (v: number) => Math.trunc(v * 100 + 1e-9) / 100;
 
   const calcularProbabilidad = (primerServicio: number, ganado1er: number, ganado2do: number) => {
@@ -90,62 +148,6 @@ export default function GanadorCero1530() {
     if (stake === "STAKE 1") return "var(--ts-accent-lime)";
     return "var(--ts-accent-green)";
   };
-
-  const CampoJugador = ({
-    titulo, datos, onChange,
-  }: {
-    titulo: string;
-    datos: DatosJugador;
-    onChange: (d: DatosJugador) => void;
-  }) => (
-    <div className="ts-card mb-4">
-      <span className="ts-label ts-label-muted mb-3 d-block">{titulo}</span>
-
-      <div className="mb-3">
-        <label className="ts-input-label">Nombre</label>
-        <input
-          type="text"
-          className="ts-input"
-          placeholder={titulo}
-          value={datos.nombre}
-          onChange={(e) => onChange({ ...datos, nombre: e.target.value })}
-        />
-      </div>
-
-      <div className="row g-3">
-        <div className="col-4">
-          <label className="ts-input-label">1er servicio %</label>
-          <input
-            type="text"
-            className="ts-input"
-            placeholder="78,1"
-            value={datos.primerServicio}
-            onChange={(e) => onChange({ ...datos, primerServicio: e.target.value })}
-          />
-        </div>
-        <div className="col-4">
-          <label className="ts-input-label">Ganado 1er %</label>
-          <input
-            type="text"
-            className="ts-input"
-            placeholder="59,4"
-            value={datos.ganado1er}
-            onChange={(e) => onChange({ ...datos, ganado1er: e.target.value })}
-          />
-        </div>
-        <div className="col-4">
-          <label className="ts-input-label">Ganado 2do %</label>
-          <input
-            type="text"
-            className="ts-input"
-            placeholder="44,8"
-            value={datos.ganado2do}
-            onChange={(e) => onChange({ ...datos, ganado2do: e.target.value })}
-          />
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div>
