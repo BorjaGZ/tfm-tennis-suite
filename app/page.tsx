@@ -40,6 +40,15 @@ const appsFilaInferior = [
     icon: "📈",
   },
   {
+    href: "/ganador-0-15-30",
+    title: "Ganador 0-15-30",
+    desc: "Calcula la probabilidad de ganar el servicio a 0-15-30 y el stake según el diferencial.",
+    badge: "Calculadora",
+    badgeClass: "ts-badge-lime",
+    accentClass: "ts-card-accent-lime",
+    icon: "🎾",
+  },
+  {
     href: "/generador-tarjetas",
     title: "Generador de Tarjetas",
     desc: "Crea tarjetas visuales de partidos para compartir en redes sociales.",

@@ -86,6 +86,15 @@ Predice el ganador de un partido de tenis en tierra batida usando el Modelo Tier
 - Devuelve el ganador estimado y la probabilidad con nivel de confianza
 - El modelo es intercambiable: basta con sustituir `data/modelo_tierra_batida.md` para actualizar a una nueva versión sin tocar código
 
+### 8. 🎾 Ganador 0-15-30
+Calcula la probabilidad de cada jugador de ganar su servicio a 0-15-30 y recomienda el stake según el diferencial.
+
+- Formulario con 2 jugadores: nombre, % de 1er servicio, % de puntos ganados con 1er servicio, % de puntos ganados con 2do servicio
+- Aplica la fórmula estadística: `p = A×B + (1-A)×C`, `q = 1-p`, `Prob = (p⁴ + 4p⁴q + 10p⁴q²) × 100`
+- Muestra la probabilidad de cada jugador y determina el ganador
+- Calcula el **valor diferenciador** (diferencia absoluta entre ambas probabilidades)
+- Recomienda el stake según el diferencial: `<5` NO APOSTAR · `5-9` STAKE 1 · `10-14` STAKE 2 · `≥15` STAKE 3
+
 ---
 
 ## 🛠️ Stack tecnológico
