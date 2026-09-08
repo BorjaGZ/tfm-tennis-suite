@@ -96,7 +96,7 @@ export default function Home() {
         {/* Fila superior — 4 apps principales */}
         <div className="row g-4 mb-4">
           {appsFilaSuperior.map((app) => (
-            <div key={app.href} className="col-12 col-sm-6 col-xl-4">
+            <div key={app.href} className="col-12 col-sm-6 col-xl-3">
               <Link href={app.href} className="ts-app-card">
                 <div className={app.accentClass} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px" }} />
                 <span className="ts-app-card-icon">{app.icon}</span>
