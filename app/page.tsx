@@ -15,6 +15,16 @@ const appsFilaSuperior = [
     accentClass: "ts-card-accent-purple",
     icon: "📊",
   },
+    {
+    href: "/ganador-0-15-30",
+    title: "Ganador 0-15-30",
+    desc: "Calcula la probabilidad de ganar el servicio a 0-15-30 y el stake según el diferencial.",
+    badge: "Calculadora",
+    badgeClass: "ts-badge-lime",
+    accentClass: "ts-card-accent-lime",
+    icon: "🎾",
+  },
+
   {
     href: "/entrenamiento-modelo",
     title: "Entrenamiento del Modelo",
@@ -38,15 +48,6 @@ const appsFilaInferior = [
     desc: "Introduce la probabilidad y la cuota para saber si hay value y qué stake aplicar.",
     accentClass: "ts-card-accent-purple",
     icon: "📈",
-  },
-  {
-    href: "/ganador-0-15-30",
-    title: "Ganador 0-15-30",
-    desc: "Calcula la probabilidad de ganar el servicio a 0-15-30 y el stake según el diferencial.",
-    badge: "Calculadora",
-    badgeClass: "ts-badge-lime",
-    accentClass: "ts-card-accent-lime",
-    icon: "🎾",
   },
   {
     href: "/generador-tarjetas",
