@@ -260,9 +260,9 @@ export default function GanadorCero1530() {
                     </thead>
                     <tbody>
                       {[
-                        { rango: "< 5",     stake: "NO APOSTAR", color: "#ff6666" },
-                        { rango: "5 – 9",   stake: "STAKE 1",    color: "var(--ts-accent-lime)" },
-                        { rango: "10 – 14", stake: "STAKE 2",    color: "var(--ts-accent-green)" },
+                        { rango: "< 10",     stake: "NO APOSTAR", color: "#ff6666" },
+                        { rango: "11 – 12",   stake: "STAKE 1",    color: "var(--ts-accent-lime)" },
+                        { rango: "13 – 14", stake: "STAKE 2",    color: "var(--ts-accent-green)" },
                         { rango: "≥ 15",    stake: "STAKE 3",    color: "var(--ts-accent-green)" },
                       ].map((r) => (
                         <tr key={r.stake} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
