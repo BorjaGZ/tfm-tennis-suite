@@ -97,8 +97,8 @@ export default function GanadorCero1530() {
   };
 
   const determinarStake = (diferencial: number): Resultado["stake"] => {
-    if (diferencial < 5) return "NO APOSTAR";
-    if (diferencial <= 9) return "STAKE 1";
+    if (diferencial < 10) return "NO APOSTAR";
+    if (diferencial <= 12) return "STAKE 1";
     if (diferencial <= 14) return "STAKE 2";
     return "STAKE 3";
   };
